@@ -9,6 +9,7 @@ This repository is a record of intellectual exploration rather than a collection
 | Year | Text | Themes | Status |
 | --- | --- | --- | --- |
 | 2026 | [The Intelligence Attractor Hypothesis](ideas/intelligence-attractor-hypothesis.md) | intelligence, optimization, cognition, future | Initial formulation |
+| 2026 | [Потенційне емпіричне підтвердження IAH: Salt Sensitivity](ideas/empirical-evidence-salt-sensitivity.md) | AI agents, convergence, experimentation, distributed systems | Initial formulation |
 
 ## Repository structure
 
@@ -25,4 +26,3 @@ This archive is intended to preserve a public intellectual trail and provide con
 ## Status and attribution
 
 Unless a text explicitly says otherwise, it represents an evolving personal hypothesis rather than an established scientific result. When discussing or reusing an idea, please attribute the author and link to the relevant document.
-
