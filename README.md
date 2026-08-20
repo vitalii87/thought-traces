@@ -9,7 +9,8 @@ This repository is a record of intellectual exploration rather than a collection
 | Year | Text | Themes | Status |
 | --- | --- | --- | --- |
 | 2026 | [The Intelligence Attractor Hypothesis](ideas/intelligence-attractor-hypothesis.md) | intelligence, optimization, cognition, future | Initial formulation |
-| 2026 | [Потенційне емпіричне підтвердження IAH: Salt Sensitivity](ideas/empirical-evidence-salt-sensitivity.md) | AI agents, convergence, experimentation, distributed systems | Initial formulation |
+| 2026 | [Potential Empirical Evidence for IAH: Salt Sensitivity](ideas/empirical-evidence-salt-sensitivity.md) | AI agents, convergence, experimentation, distributed systems | Initial formulation |
+| 2026 | [Relational Narrowing and Strong Functional Uniqueness](ideas/relational-narrowing-and-strong-functional-uniqueness.md) | optimization, functional equivalence, Pareto front, dynamic optimum | Initial formulation |
 
 ## Repository structure
 

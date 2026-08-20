@@ -1,162 +1,163 @@
-# Потенційне емпіричне підтвердження Гіпотези інтелектуального атрактора
+# Potential Empirical Evidence for the Intelligence Attractor Hypothesis
 
-**Автор:** Vitalii Zhyliaiev  
-**Перша фіксація:** 2026-08-19  
-**Статус:** Початкове формулювання
+**Author:** Vitalii Zhyliaiev
 
-Навіть сучасні AI-агенти можуть дати перші слабкі прояви Інтелектуального атрактора.
+**First recorded:** 2026-08-19
 
-Сьогодні агенти від різних компаній суттєво відрізняються. На їхні рішення впливають:
+**Status:** Initial formulation
 
-* навчальні дані;
-* обсяг і якість знань;
-* архітектура моделі;
-* доступні обчислювальні ресурси;
-* системні інструкції;
-* інструменти;
-* комерційні пріоритети;
-* випадковість генерації;
-* попередній контекст.
+Even contemporary AI agents may already exhibit early, weak manifestations of the Intelligence Attractor.
 
-Цю сукупність початкових відмінностей можна умовно назвати **«сіллю» (salt)** агента.
+Today, agents developed by different companies differ substantially. Their decisions are influenced by:
 
-Тому сьогодні результат можна уявити так:
+- training data;
+- the scope and quality of their knowledge;
+- model architecture;
+- available computational resources;
+- system instructions;
+- tools;
+- commercial priorities;
+- generation randomness;
+- prior context.
 
-\[
+This collection of initial differences can provisionally be called an agent's **salt**.
+
+The result can therefore be represented as:
+
+$$
 Solution_i = F(Problem, Constraints, Salt_i, Competence_i)
-\]
+$$
 
-Різна «сіль» може суттєво змінювати рішення навіть за однакової задачі.
+Differences in salt can substantially alter a solution even when the task is the same.
 
-Однак IAH передбачає, що зі зростанням компетентності агента та точності постановки задачі вплив цієї «солі» на функціонально оптимальне рішення повинен зменшуватися.
+However, IAH predicts that as an agent's competence increases and the problem specification becomes more precise, the influence of this salt on the functionally optimal solution should decrease.
 
-Умовно:
+Conceptually:
 
-\[
+$$
 Competence \uparrow
-\]
+$$
 
-\[
+$$
 Constraint\ precision \uparrow
-\]
+$$
 
-\[
+$$
 Salt\ influence \downarrow
-\]
+$$
 
 ---
 
-## Уявний експеримент: проектування розподіленої системи
+## Thought Experiment: Designing a Distributed System
 
-Кільком незалежним AI-агентам дається однакова складна задача: спроектувати розподілену P2P-систему на кшталт Swagri.
+Several independent AI agents are given the same complex task: to design a distributed P2P system similar to Swagri.
 
-Фіксуються однакові умови:
+The same conditions are fixed for every agent:
 
-* типи вузлів;
-* мережеві характеристики;
-* обмеження пам'яті;
-* вимоги до latency;
-* throughput;
-* fault tolerance;
-* енергоспоживання;
-* безпека;
-* масштабування.
+- node types;
+- network characteristics;
+- memory constraints;
+- latency requirements;
+- throughput;
+- fault tolerance;
+- energy consumption;
+- security;
+- scalability.
 
-На початку агенти можуть запропонувати різні рішення:
+At first, the agents may propose different solutions:
 
-* Rust;
-* Go;
-* C++;
-* різні транспортні протоколи;
-* різну модель конкурентності;
-* різну структуру сервісів;
-* різні формати даних.
+- Rust;
+- Go;
+- C++;
+- different transport protocols;
+- different concurrency models;
+- different service structures;
+- different data formats.
 
-Це природно, оскільки початковий простір допустимих рішень великий, а «сіль» агентів різна.
+This is natural because the initial space of admissible solutions is large and the agents have different salt.
 
-Але якщо всі системи отримують однакові об'єктивні результати тестування і багато разів покращують свої проекти, неефективні рішення починають відсіюватися.
+But if every system receives the same objective benchmark results and repeatedly improves its design, inefficient solutions begin to be filtered out.
 
-У певних умовах може виявитися, що одна мова, одна модель конкурентності або певний клас мережевої архітектури стабільно дають кращий результат.
+Under certain conditions, one language, one concurrency model, or a particular class of network architecture may consistently produce better results.
 
-Тоді незалежні агенти можуть поступово прийти до схожих технологічних рішень.
+The independent agents may then gradually converge on similar technological choices.
 
-Наступний рівень — конвергенція самого коду.
+The next level is convergence in the code itself.
 
-Навіть якщо синтаксис, назви змінних і структура файлів залишаються різними, агенти можуть незалежно прийти до однакових функціональних принципів:
+Even if syntax, variable names, and file structures remain different, the agents may independently converge on the same functional principles:
 
-* неблокуючий I/O;
-* bounded queues;
-* мінімізація копіювання;
-* схожі механізми backpressure;
-* подібне розділення transport / protocol / executor;
-* однакові способи обробки помилок;
-* подібні алгоритми планування задач.
+- non-blocking I/O;
+- bounded queues;
+- minimization of copying;
+- similar backpressure mechanisms;
+- a similar separation of transport / protocol / executor;
+- the same approaches to error handling;
+- similar task-scheduling algorithms.
 
-Тобто текстова відмінність може залишатися високою, тоді як **функціональна відстань між рішеннями зменшується**.
+Textual difference may therefore remain high while the **functional distance between solutions decreases**.
 
 ---
 
-## Сильніший випадок
+## A Stronger Case
 
-Ще сильнішим проявом IAH буде ситуація, коли жоден наявний інструмент не є достатньо ефективним.
+An even stronger manifestation of IAH would arise when none of the available tools is sufficiently efficient.
 
-Тоді незалежні агенти можуть прийти до висновку, що потрібно створити новий.
+Independent agents may then conclude that a new tool must be created.
 
-Наприклад, вони можуть незалежно спроектувати різні мови програмування, але всі ці мови матимуть схожі фундаментальні властивості:
+For example, they may independently design different programming languages, yet all of those languages may share similar fundamental properties:
 
-* memory safety;
-* низькорівневий контроль;
-* мінімальну runtime-вартість;
-* детерміноване керування ресурсами;
-* сильну систему типів;
-* ефективну конкурентність;
-* засоби для розподілених обчислень.
+- memory safety;
+- low-level control;
+- minimal runtime overhead;
+- deterministic resource management;
+- a strong type system;
+- efficient concurrency;
+- facilities for distributed computing.
 
-Назви та синтаксис можуть бути різними.
+Their names and syntax may differ.
 
-Але якщо функціональна структура незалежних рішень зближується, це буде сильнішим свідченням атрактора, ніж простий вибір однакового готового продукту.
+But if the functional structure of independent solutions converges, this would constitute stronger evidence for an attractor than merely selecting the same existing product.
 
 ---
 
 ## Salt Sensitivity
 
-Для експериментів можна ввести поняття **Salt Sensitivity** — чутливості рішення до початкових відмінностей агента.
+For experimental purposes, we can introduce the concept of **Salt Sensitivity**: the sensitivity of a solution to an agent's initial differences.
 
-Нехай:
+Let:
 
-\[
+$$
 S_i
-\]
+$$
 
-— «сіль» агента \(i\).
+denote the salt of agent \(i\).
 
-Тоді один із можливих прогнозів IAH:
+One possible prediction of IAH is:
 
-> **За фіксованої задачі, середовища та критеріїв оцінювання залежність функціональної структури рішення від початкової «солі» повинна зменшуватися зі зростанням компетентності оптимізатора.**
+> **For a fixed task, environment, and evaluation criteria, the dependence of a solution's functional structure on its initial salt should decrease as the competence of the optimizer increases.**
 
-У граничному випадку:
+In the limiting case:
 
-\[
+$$
 \frac{\partial Solution}{\partial Salt} \rightarrow 0
-\]
+$$
 
-Це не означає, що всі агенти повинні генерувати буквально однаковий код.
+This does not mean that all agents must generate literally identical code.
 
-Йдеться про те, що випадкові особливості їхнього походження дедалі менше визначають **функціонально важливі частини рішення**.
+It means that accidental features of their origins increasingly cease to determine the **functionally significant parts of the solution**.
 
-Тоді центральна тенденція виглядає так:
+The central tendency can therefore be represented as:
 
-\[
+$$
 \text{Salt influence} \downarrow
-\]
+$$
 
-\[
+$$
 \text{Constraint influence} \uparrow
-\]
+$$
 
-\[
+$$
 \text{Functional convergence} \uparrow
-\]
+$$
 
-Це може стати одним із перших практично перевірюваних передбачень Гіпотези інтелектуального атрактора ще до появи справжнього AGI.
-
+This may become one of the first practically testable predictions of the Intelligence Attractor Hypothesis, even before the emergence of genuine AGI.
