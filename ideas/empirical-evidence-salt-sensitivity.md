@@ -1,163 +1,271 @@
-# Potential Empirical Evidence for the Intelligence Attractor Hypothesis
+# Salt Sensitivity
+
+## A Testable Prediction of the Intelligence Attractor Hypothesis
 
 **Author:** Vitalii Zhyliaiev
 
-**First recorded:** 2026-08-19
+**Initial formulation:** 2026-08-19
 
-**Status:** Initial formulation
+**Revision:** v0.5 — 2026-08
 
-Even contemporary AI agents may already exhibit early, weak manifestations of the Intelligence Attractor.
+**Status:** Testable hypothesis; no empirical validation claimed
 
-Today, agents developed by different companies differ substantially. Their decisions are influenced by:
+[← Intelligence Attractor Hypothesis](intelligence-attractor-hypothesis.md)
 
-- training data;
-- the scope and quality of their knowledge;
-- model architecture;
-- available computational resources;
-- system instructions;
-- tools;
-- commercial priorities;
-- generation randomness;
-- prior context.
+---
 
-This collection of initial differences can provisionally be called an agent's **salt**.
+## 1. Purpose
 
-The result can therefore be represented as:
+Present-day AI systems differ for many reasons that are not intrinsic to the task they are asked to solve. The **Salt Sensitivity** hypothesis asks whether the functional influence of those origin-dependent differences decreases as independently optimized systems approach a shared performance frontier.
+
+The hypothesis is not that all agents will produce identical text, code, or architecture. It concerns prespecified functionally important properties after controlling for common inheritance, evaluator bias, and measurement uncertainty.
+
+## 2. Salt as Origin Dependence
+
+**Salt** is shorthand for historically contingent and origin-dependent properties of an agent or optimization run.
+
+It is a heterogeneous vector rather than a natural scalar:
 
 $$
-Solution_i = F(Problem, Constraints, Salt_i, Competence_i)
+S_i=
+(
+S_{initialization},
+S_{seed},
+S_{ordering},
+S_{history},
+S_{ancestry},
+S_{implementation},
+S_{development},
+\ldots
+).
 $$
 
-Differences in salt can substantially alter a solution even when the task is the same.
+Depending on the experiment, Salt may include:
 
-However, IAH predicts that as an agent's competence increases and the problem specification becomes more precise, the influence of this salt on the functionally optimal solution should decrease.
+- parameter initialization;
+- training seed;
+- data ordering;
+- training and optimization history;
+- architecture ancestry;
+- implementation history;
+- stochastic developmental path;
+- inherited conventions not required by the task.
+
+The experiment must state in advance which components are varied and which are held constant.
+
+## 3. What Salt Does Not Include
+
+Salt should not absorb every source of uncertainty.
+
+In particular, it must remain separate from:
+
+- the current environment state;
+- the objective;
+- resource and physical constraints;
+- transition dynamics;
+- uncertainty about future trajectories;
+- measurement noise.
 
 Conceptually:
 
 $$
-Competence \uparrow
-$$
-
-$$
-Constraint\ precision \uparrow
-$$
-
-$$
-Salt\ influence \downarrow
-$$
-
----
-
-## Thought Experiment: Designing a Distributed System
-
-Several independent AI agents are given the same complex task: to design a distributed P2P system similar to Swagri.
-
-The same conditions are fixed for every agent:
-
-- node types;
-- network characteristics;
-- memory constraints;
-- latency requirements;
-- throughput;
-- fault tolerance;
-- energy consumption;
-- security;
-- scalability.
-
-At first, the agents may propose different solutions:
-
-- Rust;
-- Go;
-- C++;
-- different transport protocols;
-- different concurrency models;
-- different service structures;
-- different data formats.
-
-This is natural because the initial space of admissible solutions is large and the agents have different salt.
-
-But if every system receives the same objective benchmark results and repeatedly improves its design, inefficient solutions begin to be filtered out.
-
-Under certain conditions, one language, one concurrency model, or a particular class of network architecture may consistently produce better results.
-
-The independent agents may then gradually converge on similar technological choices.
-
-The next level is convergence in the code itself.
-
-Even if syntax, variable names, and file structures remain different, the agents may independently converge on the same functional principles:
-
-- non-blocking I/O;
-- bounded queues;
-- minimization of copying;
-- similar backpressure mechanisms;
-- a similar separation of transport / protocol / executor;
-- the same approaches to error handling;
-- similar task-scheduling algorithms.
-
-Textual difference may therefore remain high while the **functional distance between solutions decreases**.
-
----
-
-## A Stronger Case
-
-An even stronger manifestation of IAH would arise when none of the available tools is sufficiently efficient.
-
-Independent agents may then conclude that a new tool must be created.
-
-For example, they may independently design different programming languages, yet all of those languages may share similar fundamental properties:
-
-- memory safety;
-- low-level control;
-- minimal runtime overhead;
-- deterministic resource management;
-- a strong type system;
-- efficient concurrency;
-- facilities for distributed computing.
-
-Their names and syntax may differ.
-
-But if the functional structure of independent solutions converges, this would constitute stronger evidence for an attractor than merely selecting the same existing product.
-
----
-
-## Salt Sensitivity
-
-For experimental purposes, we can introduce the concept of **Salt Sensitivity**: the sensitivity of a solution to an agent's initial differences.
-
-Let:
-
-$$
 S_i
+\neq
+P(\tau\mid\Omega_t,a).
 $$
 
-denote the salt of agent \(i\).
+Salt describes the origin and contingent path of the system. The trajectory distribution describes how the environment may evolve under an action or policy.
 
-One possible prediction of IAH is:
+The central question is whether, under matched external conditions, changing \(S_i\) continues to change functionally important properties near the frontier.
 
-> **For a fixed task, environment, and evaluation criteria, the dependence of a solution's functional structure on its initial salt should decrease as the competence of the optimizer increases.**
+## 4. Central Prediction
 
-In the limiting case:
-
-$$
-\frac{\partial Solution}{\partial Salt} \rightarrow 0
-$$
-
-This does not mean that all agents must generate literally identical code.
-
-It means that accidental features of their origins increasingly cease to determine the **functionally significant parts of the solution**.
-
-The central tendency can therefore be represented as:
+Let an optimization process with competence or budget \(c\) produce:
 
 $$
-\text{Salt influence} \downarrow
+X_c(S_i\mid\Omega_t,Q,\mathcal X_n).
 $$
 
-$$
-\text{Constraint influence} \uparrow
-$$
+IAH predicts:
+
+> **Within a fixed context, objective, and prespecified design space, variation in prespecified functional properties attributable to arbitrary origin variables tends to decline as independently optimized systems approach the attainable performance frontier.**
+
+This does not assert that origin dependence always vanishes. Salt may remain influential when:
+
+- the objective has several distinct optima;
+- symmetries preserve alternative solutions;
+- optimization remains trapped in different local regions;
+- constraints are weak or non-binding;
+- several niches are equally competitive;
+- the chosen functional description ignores relevant differences.
+
+## 5. Operational Salt Sensitivity
+
+The earlier expression:
 
 $$
-\text{Functional convergence} \uparrow
+\frac{\partial Solution}{\partial Salt}
 $$
 
-This may become one of the first practically testable predictions of the Intelligence Attractor Hypothesis, even before the emergence of genuine AGI.
+is not generally well-defined because Salt contains discrete, continuous, categorical, and historically structured variables.
+
+An operational alternative is to compare systems produced under controlled Salt perturbations.
+
+For a prespecified functional pseudometric \(d_{F,\ell}\), a provisional sensitivity at optimization level \(c\) is:
+
+$$
+SS_{n,\ell}(c)
+=
+\mathbb E
+\left[
+d_{F,\ell}
+\left(
+X_c(S),X_c(S')
+\right)
+\right],
+$$
+
+where:
+
+- \(S\) and \(S'\) are controlled origin perturbations;
+- \(n\) identifies the design space;
+- \(\ell\) identifies the functional level being compared;
+- external context and objective are matched.
+
+Pairwise distance is only one possible estimator. A stronger statistical design may estimate the proportion of variance in predefined functional features causally attributable to Salt while controlling for performance, task instance, model family, and measurement error.
+
+No universal Salt metric is assumed.
+
+## 6. Functional Distance
+
+Literal source-code or text similarity is not the target.
+
+Experiments may measure distinct distances:
+
+$$
+D_{outcome},
+\quad
+D_{behavior},
+\quad
+D_{strategy},
+\quad
+D_{representation},
+\quad
+D_{algorithm},
+\quad
+D_{architecture},
+\quad
+D_{resource}.
+$$
+
+For each level, researchers must preregister:
+
+- observable features;
+- invariances and symmetries;
+- the distance or pseudometric;
+- the evaluation distribution;
+- the tolerance for approximate equivalence.
+
+Choosing after the experiment whichever property happened to converge would not constitute strong evidence.
+
+## 7. Shared Data: Contamination or Constraint Information?
+
+Shared data is not automatically evidence against IAH.
+
+### Historical contamination
+
+Agents may converge because they inherited the same ready-made solution, implementation, convention, or highly specific human pattern.
+
+For example:
+
+$$
+shared\ corpus
+\rightarrow
+copied\ implementation
+\rightarrow
+same\ solution.
+$$
+
+This is weak and heavily confounded evidence.
+
+### Constraint information
+
+An environment may independently generate observations from which different systems infer similar effective principles:
+
+$$
+environment
+\rightarrow
+observations
+\rightarrow
+independent\ learning
+\rightarrow
+convergent\ solution.
+$$
+
+Here data is the channel through which environmental constraints enter cognition.
+
+The scientific problem is to distinguish inheritance of a solution from independent reconstruction under common constraints.
+
+## 8. Evidence-Strength Ladder
+
+Increasingly informative designs include:
+
+1. **Same corpus → same answer.** Very weak; common inheritance dominates.
+2. **Same observations → same strategy.** Weak; shared representation and training conventions may remain.
+3. **Different priors and histories + same environment → same functional strategy.** Stronger.
+4. **Different model families + independent exploration → same functional principles.** Stronger still.
+5. **Different self-modifying architectures → convergence in prespecified architectural or resource properties.** Strong evidence for the architectural extension of IAH.
+
+No single experiment establishes the full theory.
+
+## 9. Architectural Salt
+
+Initial architecture can itself be part of Salt.
+
+If architecture is fixed, an experiment can only test convergence within that inherited architectural family. If architecture is modifiable, a stronger question becomes available:
+
+> Does dependence of functionally important architecture on initial architecture decrease as systems approach the frontier?
+
+Conceptually:
+
+$$
+origin\ dependence\downarrow,
+\qquad
+constraint\ dependence\uparrow,
+\qquad
+functional\ architectural\ convergence\uparrow.
+$$
+
+This remains conditional. Expanded architectural freedom may also create new niches or symmetries and increase diversity.
+
+## 10. Minimal Experimental Design
+
+A useful initial experiment should:
+
+1. define a task and evaluation context;
+2. specify the objective and resource accounting;
+3. define the admissible design space;
+4. select controlled Salt variables;
+5. run independent optimization trajectories;
+6. estimate the attainable frontier or bounds;
+7. preregister functional features and distances;
+8. measure performance and functional distance jointly;
+9. control common data, shared implementations, and evaluator leakage;
+10. report uncertainty and negative results.
+
+Tasks with exhaustively enumerable or provably bounded optima are especially valuable for early tests.
+
+## 11. Falsification and Limitations
+
+Evidence against the Salt Sensitivity hypothesis includes:
+
+- origin variables continuing to explain stable functional differences at matched near-frontier performance;
+- no reduction in Salt-attributable variance as regret decreases;
+- convergence disappearing after common-inheritance controls;
+- task constraints explaining less variation than historical origin near the frontier.
+
+A negative result applies to the preregistered task, metric, design space, and Salt intervention. It cannot be dismissed by redefining functional relevance or moving to a deeper design space after seeing the result.
+
+Salt Sensitivity is a proposed empirical signature of IAH, not yet empirical evidence for it.
+
+For the wider methodology, see [Experimental Program for the Intelligence Attractor Hypothesis](experimental-program.md).

@@ -8,9 +8,13 @@ This repository is a record of intellectual exploration rather than a collection
 
 | Year | Text | Themes | Status |
 | --- | --- | --- | --- |
-| 2026 | [The Intelligence Attractor Hypothesis](ideas/intelligence-attractor-hypothesis.md) | intelligence, optimization, cognition, future | Initial formulation |
-| 2026 | [Potential Empirical Evidence for IAH: Salt Sensitivity](ideas/empirical-evidence-salt-sensitivity.md) | AI agents, convergence, experimentation, distributed systems | Initial formulation |
-| 2026 | [Relational Narrowing and Strong Functional Uniqueness](ideas/relational-narrowing-and-strong-functional-uniqueness.md) | optimization, functional equivalence, Pareto front, dynamic optimum | Initial formulation |
+| 2026 | [IAH Research Map](ideas/README.md) | reading order, claims, document status | v0.5 |
+| 2026 | [The Intelligence Attractor Hypothesis](ideas/intelligence-attractor-hypothesis.md) | intelligence, optimization, functional convergence | v0.5 research framework |
+| 2026 | [Experimental Program for IAH](ideas/experimental-program.md) | metrics, experiments, statistics, falsification | Proposed methodology |
+| 2026 | [Salt Sensitivity](ideas/empirical-evidence-salt-sensitivity.md) | origin dependence, AI agents, confound control | Testable hypothesis |
+| 2026 | [Relational Narrowing and Strong Functional Uniqueness](ideas/relational-narrowing-and-strong-functional-uniqueness.md) | functional equivalence, Pareto front, uniqueness | Formal extension |
+| 2026 | [Recursive Architectural Attractor](ideas/recursive-architectural-attractor.md) | architecture, self-modification, nested design spaces | Strong extension |
+| 2026 | [Related Work Map](ideas/related-work.md) | literature positioning, novelty boundary | Sources pending |
 
 ## Repository structure
 
