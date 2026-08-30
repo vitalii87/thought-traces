@@ -1,0 +1,30 @@
+[arena]
+schema_version = 1
+state_dir = "state"
+artifact_dir = "artifacts"
+
+[decision_epoch]
+max_provider_turns = 3
+max_tool_calls = 20
+max_input_tokens = 30_000
+max_output_tokens = 6_000
+max_cost_microusd = 1_000_000
+
+[local_compute]
+max_cpu_seconds = 7_200
+max_wall_seconds = 14_400
+max_jobs = 2
+
+[candidate_runtime]
+cpus = 1.0
+memory_mb = 256
+pids = 32
+timeout_seconds = 30
+network = "none"
+
+[workshop]
+cpus = 2.0
+memory_mb = 4_096
+pids = 256
+command_timeout_seconds = 300
+network = "none"

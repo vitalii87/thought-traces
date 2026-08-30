@@ -22,10 +22,15 @@ This repository is a record of intellectual exploration rather than a collection
 | --- | --- | --- | --- |
 | EXP-001 | [Independent Self-Improving Lineages](experiments/001-independent-self-improving-lineages/README.md) | Do shared binding constraints erase origin dependence near a performance frontier? | Design draft |
 
+## Arena
+
+The provider-neutral laboratory is being developed in [`arena/`](arena/README.md). Its first milestone defines immutable event telemetry, resource and API budgets, lineage state, and the adapter boundary through which external optimizing agents will later operate.
+
 ## Repository structure
 
 - `ideas/` — developed hypotheses and essays
 - `experiments/` — concrete protocols, lineage implementations, measurements, and results
+- `arena/` — task-independent orchestration, isolation, telemetry, and provider interfaces
 - `notes/` — shorter or unfinished reflections
 - `templates/` — a reusable format for documenting new ideas
 
