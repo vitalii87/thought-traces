@@ -6,7 +6,7 @@
 
 **Initial formulation:** 2026
 
-**Revision:** v0.5 — 2026-08
+**Revision:** v0.6 — 2026-08
 
 **Status:** Developing research framework; not experimentally validated
 
@@ -108,6 +108,23 @@ $$
 $$
 
 The relevant object for dynamic problems is generally a policy evaluated over future trajectories, not an isolated immediate action.
+
+### Pursuit analogy
+
+Imagine several snakes pursuing the same moving mouse. They begin at different positions and headings, so their early paths strongly reflect their origins. If the snakes share the same physical constraints and repeatedly correct their motion against the same target dynamics, the later portions of their paths may become increasingly similar: the target and the physics of pursuit explain more of the trajectory, while the starting position explains less.
+
+The correspondence is:
+
+- a snake is an independently optimized lineage;
+- its initial position and body plan are origin and initial architecture;
+- its physical limits are the admissible design space and resource constraints;
+- course correction is iterative optimization;
+- the moving mouse is a changing attainable frontier;
+- the trail is the lineage's functional and architectural history.
+
+The trails need not overlap in absolute coordinates. What may converge is the pursuit law: relative angle, curvature, prediction, response to target motion, and resource-efficient control. Likewise, software lineages need not produce textually identical code to discover the same functional principles.
+
+The analogy is illustrative, not evidence for IAH. Ordinary optimization can also generate similar pursuit paths. The empirical content of IAH begins only when the experiment measures whether functionally relevant diversity and origin-attributable variation systematically contract near a shared frontier, and whether this contraction recurs after prespecified changes in the target or binding constraints.
 
 ## 4. Levels of Functional Convergence
 

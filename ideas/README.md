@@ -17,7 +17,7 @@ The program separates present-day empirical hypotheses from stronger theoretical
 
 | Document | Primary question | Status |
 | --- | --- | --- |
-| [Intelligence Attractor Hypothesis](intelligence-attractor-hypothesis.md) | Does near-frontier optimization produce functional narrowing? | Core research framework |
+| [Intelligence Attractor Hypothesis](intelligence-attractor-hypothesis.md) | Does near-frontier optimization produce functional narrowing? | Core research framework, v0.6 |
 | [Experimental Program](experimental-program.md) | How can narrowing and origin dependence be measured and falsified? | Proposed methodology |
 | [Salt Sensitivity](empirical-evidence-salt-sensitivity.md) | Does arbitrary historical origin matter less near a frontier? | Testable empirical hypothesis |
 | [Relational Narrowing](relational-narrowing-and-strong-functional-uniqueness.md) | Does additional causal context reduce accidental ties? | Formal extension |
