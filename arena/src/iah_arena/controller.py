@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Mapping
 
+from .artifacts import ArtifactProvenance, ArtifactStore
 from .budgets import BudgetLedger
 from .domain import ArenaEvent, EventType
 from .events import JsonlEventStore
@@ -23,13 +24,15 @@ class AttemptRunResult:
     evaluation: Mapping[str, Any]
     session: SessionOutcome
     files_path: Path
+    artifact_id: str | None = None
 
 
 class ArenaController:
     """Trusted orchestration boundary for one experimental lineage."""
 
-    def __init__(self, state_dir: Path) -> None:
+    def __init__(self, state_dir: Path, *, artifact_dir: Path | None = None) -> None:
         self.state_dir = Path(state_dir)
+        self.artifact_store = None if artifact_dir is None else ArtifactStore(artifact_dir)
 
     def event_store(self, lineage_id: str) -> JsonlEventStore:
         return JsonlEventStore(self.state_dir / "lineages" / lineage_id / "events.jsonl")
@@ -79,6 +82,7 @@ class ArenaController:
         public_test_runner: PublicTestRunner,
         evaluator: Evaluator,
         limits: SessionLimits = SessionLimits(),
+        artifact_provenance: ArtifactProvenance | None = None,
     ) -> AttemptRunResult:
         manager = self.workspace_manager(lineage_id)
         current_generation = manager.current_generation()
@@ -93,6 +97,25 @@ class ArenaController:
             raise ValueError(
                 "decision context does not match requested lineage, epoch, generation, and attempt"
             )
+        if artifact_provenance is not None:
+            if self.artifact_store is None:
+                raise ValueError("artifact_provenance requires an artifact store")
+            expected_provenance = (
+                lineage_id,
+                epoch,
+                current_generation + 1,
+                attempt,
+                current_generation,
+            )
+            actual_provenance = (
+                artifact_provenance.lineage_id,
+                artifact_provenance.epoch,
+                artifact_provenance.generation,
+                artifact_provenance.attempt,
+                artifact_provenance.parent_generation,
+            )
+            if actual_provenance != expected_provenance:
+                raise ValueError("artifact provenance does not match the requested attempt")
         workspace = manager.begin_attempt(epoch=epoch, attempt=attempt)
         generation = workspace.lifecycle.parent_generation
         store = self.event_store(lineage_id)
@@ -166,10 +189,39 @@ class ArenaController:
         emit(EventType.CANDIDATE_EVALUATED, evaluation)
 
         if accepted:
+            artifact_id = None
+            if artifact_provenance is not None:
+                try:
+                    manifest = self.artifact_store.capture_directory(
+                        workspace.files_path,
+                        artifact_type="accepted_candidate",
+                        provenance=artifact_provenance,
+                    )
+                    artifact_id = manifest.artifact_id
+                except Exception as error:
+                    archived = manager.reject(workspace, reason=f"artifact failure: {error}")
+                    emit(
+                        EventType.ARENA_FAILURE,
+                        {"error_type": type(error).__name__, "message": str(error)},
+                    )
+                    emit(EventType.CANDIDATE_REJECTED, {"reason": archived.lifecycle.reason})
+                    raise
             promoted = manager.accept(workspace)
             next_generation = promoted.lifecycle.parent_generation + 1
+            if artifact_id is not None:
+                emit(
+                    EventType.ARTIFACT_CAPTURED,
+                    {"artifact_id": artifact_id, "generation": next_generation},
+                )
             emit(EventType.CANDIDATE_ACCEPTED, {"generation": next_generation})
-            return AttemptRunResult(True, next_generation, evaluation, outcome, promoted.files_path)
+            return AttemptRunResult(
+                True,
+                next_generation,
+                evaluation,
+                outcome,
+                promoted.files_path,
+                artifact_id,
+            )
 
         archived = manager.reject(
             workspace,

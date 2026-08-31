@@ -2,7 +2,7 @@
 
 IAH Arena is the task-independent laboratory for running isolated, independently optimized software lineages. It is intentionally separate from both the immutable evaluator and the mutable candidate programs.
 
-**Status:** a task-independent local orchestration core is operational; no external provider or Docker execution is connected yet.
+**Status:** the task-independent orchestration, acceptance, provenance, and container runtime layers are operational; no external model provider is connected yet.
 
 ## Design boundary
 
@@ -44,12 +44,17 @@ The Python package now provides:
 - end-to-end candidate submission and evaluator-controlled acceptance;
 - a Docker runtime boundary for isolated workshop and read-only judge commands;
 - a common polyglot image recipe that permits language migration;
+- frozen task/curriculum contracts and explicit benchmark layers;
+- component-preserving Pareto or weighted fitness acceptance;
+- content-and-provenance-addressed accepted-candidate artifacts;
 - a CLI for creating a lineage, verifying telemetry, and running a free local dry run;
 - dependency-free unit tests.
 
 No task-specific score, preferred language, or provider SDK is embedded in this layer.
 
 The container recipe and operational notes are in [`docker/README.md`](docker/README.md). Docker image tags are rejected at runtime: the experiment must use a registry digest or local SHA-256 image ID.
+
+The world-independent task boundary, curriculum rules, fitness policy, and artifact requirements are documented in [`TASK_PLUGINS.md`](TASK_PLUGINS.md).
 
 ## Planned architecture
 
@@ -100,8 +105,8 @@ Generated state and artifacts are ignored by Git.
 
 ## Near-term milestones
 
-1. Define the task/curriculum plug-in boundary without selecting the world itself.
-2. Add artifact manifests and richer statistical telemetry.
+1. Add the experiment-run state machine and enforce final-holdout closure.
+2. Add structured run manifests and cross-lineage telemetry export.
 3. Build and freeze the first polyglot image on the experiment host.
-4. Connect the runtime adapters to that task plug-in and run container smoke tests.
+4. Select and implement a preregistered task plug-in, then run container smoke tests.
 5. Only then connect real provider adapters.

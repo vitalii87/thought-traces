@@ -3,6 +3,7 @@ import unittest
 from dataclasses import asdict
 from pathlib import Path
 
+from iah_arena.artifacts import ArtifactProvenance
 from iah_arena.budgets import BudgetLedger, BudgetLimits
 from iah_arena.controller import ArenaController
 from iah_arena.providers import DecisionContext, ProviderTurn, ScriptedProvider, ToolCall
@@ -15,7 +16,7 @@ class ArenaControllerAttemptTests(unittest.TestCase):
             seed = root / "seed"
             seed.mkdir()
             (seed / "solver.txt").write_text("primitive\n", encoding="utf-8")
-            controller = ArenaController(root / "state")
+            controller = ArenaController(root / "state", artifact_dir=root / "artifacts")
             controller.initialize_lineage("lineage-a", origin="test")
             controller.initialize_workspace("lineage-a", seed)
             budget = BudgetLedger(BudgetLimits(5, 100, 100, 100, 10))
@@ -62,11 +63,28 @@ class ArenaControllerAttemptTests(unittest.TestCase):
                     == "improved\n"
                 },
                 evaluator=lambda workspace: {"accepted": True, "fitness": 1.0},
+                artifact_provenance=ArtifactProvenance(
+                    lineage_id="lineage-a",
+                    epoch=1,
+                    generation=1,
+                    attempt=1,
+                    parent_generation=0,
+                    task_id="test-task",
+                    task_version="v1",
+                    evaluator_version="v1",
+                    curriculum_digest="c" * 64,
+                    environment_digest="sha256:" + "d" * 64,
+                    arena_commit="test",
+                    random_seed=1,
+                    optimizer_id="scripted/scripted-v1",
+                ),
             )
 
             self.assertTrue(result.accepted)
             self.assertEqual(result.generation, 1)
             self.assertEqual(provider.calls, 3)
+            self.assertIsNotNone(result.artifact_id)
+            self.assertEqual(controller.artifact_store.verify(result.artifact_id), 1)
             self.assertEqual(
                 (controller.workspace_manager("lineage-a").current_files() / "solver.txt")
                 .read_text(encoding="utf-8"),
