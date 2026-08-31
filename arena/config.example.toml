@@ -4,7 +4,7 @@ state_dir = "state"
 artifact_dir = "artifacts"
 
 [decision_epoch]
-max_provider_turns = 3
+max_provider_turns = 8
 max_tool_calls = 20
 max_input_tokens = 30_000
 max_output_tokens = 6_000

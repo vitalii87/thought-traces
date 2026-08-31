@@ -1,9 +1,14 @@
 from __future__ import annotations
 
 import argparse
+from dataclasses import asdict
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
+from .budgets import BudgetLedger, BudgetLimits
 from .controller import ArenaController
+from .providers import DecisionContext, ProviderTurn, ScriptedProvider, ToolCall
+from .sessions import SessionLimits
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -18,7 +23,81 @@ def _parser() -> argparse.ArgumentParser:
     verify = subparsers.add_parser("verify-events", help="verify a lineage event hash chain")
     verify.add_argument("--state-dir", type=Path, required=True)
     verify.add_argument("--lineage-id", required=True)
+
+    dry_run = subparsers.add_parser(
+        "dry-run",
+        help="exercise one complete upgrade attempt with a deterministic fake provider",
+    )
+    dry_run.add_argument("--state-dir", type=Path, required=True)
+    dry_run.add_argument("--lineage-id", default="dry-run-001")
     return parser
+
+
+def _dry_run(controller: ArenaController, lineage_id: str) -> int:
+    with TemporaryDirectory(prefix="iah-seed-") as temporary:
+        seed = Path(temporary)
+        (seed / "solver.txt").write_text("primitive\n", encoding="utf-8")
+        controller.initialize_lineage(lineage_id, origin="scripted-dry-run")
+        controller.initialize_workspace(lineage_id, seed)
+
+    provider = ScriptedProvider(
+        (
+            ProviderTurn(tool_calls=(ToolCall("1", "read_file", {"path": "solver.txt"}),)),
+            ProviderTurn(
+                tool_calls=(
+                    ToolCall(
+                        "2",
+                        "write_file",
+                        {"path": "solver.txt", "content": "improved\n"},
+                    ),
+                )
+            ),
+            ProviderTurn(tool_calls=(ToolCall("3", "run_public_tests", {}),)),
+            ProviderTurn(
+                tool_calls=(
+                    ToolCall("4", "submit_candidate", {"summary": "dry-run upgrade"}),
+                )
+            ),
+        )
+    )
+    limits = BudgetLimits(8, 10_000, 10_000, 100_000, 60)
+    budget = BudgetLedger(limits)
+    context = DecisionContext(
+        lineage_id=lineage_id,
+        epoch=1,
+        generation=0,
+        attempt=1,
+        objective={"goal": "replace the primitive marker"},
+        metrics={"public_passed": False},
+        budget_remaining=asdict(budget.remaining()),
+        workspace_summary={"known_files": ["solver.txt"]},
+    )
+
+    def public_tests(workspace: Path) -> dict[str, object]:
+        passed = (workspace / "solver.txt").read_text(encoding="utf-8") == "improved\n"
+        return {"passed": passed, "checks": 1}
+
+    def evaluator(workspace: Path) -> dict[str, object]:
+        accepted = (workspace / "solver.txt").read_text(encoding="utf-8") == "improved\n"
+        return {"accepted": accepted, "fitness": 1.0 if accepted else 0.0}
+
+    result = controller.run_attempt(
+        lineage_id=lineage_id,
+        epoch=1,
+        attempt=1,
+        provider=provider,
+        context=context,
+        budget=budget,
+        public_test_runner=public_tests,
+        evaluator=evaluator,
+        limits=SessionLimits(max_provider_turns=6, max_tool_calls=10),
+    )
+    event_count = controller.verify_lineage(lineage_id)
+    print(
+        f"dry-run accepted={result.accepted} generation={result.generation} "
+        f"provider_turns={result.session.provider_turns} events={event_count}"
+    )
+    return 0 if result.accepted else 1
 
 
 def main() -> int:
@@ -34,6 +113,9 @@ def main() -> int:
         count = controller.verify_lineage(args.lineage_id)
         print(f"verified {args.lineage_id} events={count}")
         return 0
+
+    if args.command == "dry-run":
+        return _dry_run(controller, args.lineage_id)
 
     raise AssertionError(f"unhandled command: {args.command}")
 

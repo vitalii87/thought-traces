@@ -9,6 +9,7 @@ from uuid import uuid4
 
 class EventType(StrEnum):
     LINEAGE_CREATED = "lineage_created"
+    WORKSPACE_INITIALIZED = "workspace_initialized"
     EPOCH_STARTED = "epoch_started"
     ATTEMPT_STARTED = "attempt_started"
     PROVIDER_CALL_STARTED = "provider_call_started"
@@ -23,6 +24,7 @@ class EventType(StrEnum):
     CANDIDATE_EVALUATED = "candidate_evaluated"
     CANDIDATE_ACCEPTED = "candidate_accepted"
     CANDIDATE_REJECTED = "candidate_rejected"
+    ATTEMPT_ABORTED = "attempt_aborted"
     BUDGET_CHARGED = "budget_charged"
     HUMAN_INTERVENTION = "human_intervention"
     ARENA_FAILURE = "arena_failure"

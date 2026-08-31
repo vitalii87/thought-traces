@@ -2,7 +2,7 @@
 
 IAH Arena is the task-independent laboratory for running isolated, independently optimized software lineages. It is intentionally separate from both the immutable evaluator and the mutable candidate programs.
 
-**Status:** foundation scaffold; no external provider or Docker execution is connected yet.
+**Status:** a task-independent local orchestration core is operational; no external provider or Docker execution is connected yet.
 
 ## Design boundary
 
@@ -31,14 +31,18 @@ This permits infrequent model calls while preserving autonomous local experiment
 
 ## Current foundation
 
-The initial Python package provides:
+The Python package now provides:
 
 - domain identifiers and event types;
 - an append-only JSONL event store with a SHA-256 hash chain;
 - hard API and local-compute budgets;
 - a canonical provider adapter protocol;
-- basic lineage initialization;
-- a CLI for creating a lineage and verifying telemetry;
+- an explicit upgrade-attempt lifecycle;
+- copy-on-attempt workspaces with promotion and rollback-by-rejection;
+- canonical, path-confined file/test/submit tools;
+- a bounded provider tool loop and deterministic fake provider;
+- end-to-end candidate submission and evaluator-controlled acceptance;
+- a CLI for creating a lineage, verifying telemetry, and running a free local dry run;
 - dependency-free unit tests.
 
 No task-specific score, preferred language, provider SDK, or container runtime is embedded in this layer.
@@ -84,15 +88,15 @@ $env:PYTHONPATH = "src"
 python -m unittest discover -s tests -v
 python -m iah_arena init-lineage --state-dir state --lineage-id demo-001 --origin local-dry-run
 python -m iah_arena verify-events --state-dir state --lineage-id demo-001
+python -m iah_arena dry-run --state-dir state --lineage-id dry-run-001
 ```
 
 Generated state and artifacts are ignored by Git.
 
 ## Near-term milestones
 
-1. Freeze canonical tool schemas and the upgrade-attempt state machine.
-2. Add transactional workspace snapshots and rollback.
-3. Add a fake provider for deterministic end-to-end tests.
-4. Add a hardened local workshop runner.
-5. Add fresh judge execution and resource collection.
-6. Only then connect real provider adapters.
+1. Add a hardened local workshop runner with pinned polyglot toolchains.
+2. Add fresh judge execution and resource collection.
+3. Define the task/curriculum plug-in boundary without selecting the world itself.
+4. Add artifact manifests and richer statistical telemetry.
+5. Only then connect real provider adapters.
