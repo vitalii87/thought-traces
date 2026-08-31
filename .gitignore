@@ -9,3 +9,4 @@ __pycache__/
 .venv/
 arena/state/
 arena/artifacts/
+arena/exports/

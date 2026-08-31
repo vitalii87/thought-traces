@@ -47,6 +47,8 @@ The Python package now provides:
 - frozen task/curriculum contracts and explicit benchmark layers;
 - component-preserving Pareto or weighted fitness acceptance;
 - content-and-provenance-addressed accepted-candidate artifacts;
+- a frozen experiment-run state machine with a one-shot final-holdout gate;
+- validated cross-lineage event and long-form metric exports;
 - a CLI for creating a lineage, verifying telemetry, and running a free local dry run;
 - dependency-free unit tests.
 
@@ -55,6 +57,8 @@ No task-specific score, preferred language, or provider SDK is embedded in this 
 The container recipe and operational notes are in [`docker/README.md`](docker/README.md). Docker image tags are rejected at runtime: the experiment must use a registry digest or local SHA-256 image ID.
 
 The world-independent task boundary, curriculum rules, fitness policy, and artifact requirements are documented in [`TASK_PLUGINS.md`](TASK_PLUGINS.md).
+
+Run freezing, holdout access control, and analysis exports are documented in [`EXPERIMENT_RUNS.md`](EXPERIMENT_RUNS.md).
 
 ## Planned architecture
 
@@ -99,14 +103,15 @@ python -m iah_arena init-lineage --state-dir state --lineage-id demo-001 --origi
 python -m iah_arena verify-events --state-dir state --lineage-id demo-001
 python -m iah_arena dry-run --state-dir state --lineage-id dry-run-001
 python -m iah_arena docker-check --image "sha256:<local-image-id>"
+python -m iah_arena export-telemetry --state-dir state --output-dir exports/pilot --lineage-id lineage-a --lineage-id lineage-b
 ```
 
 Generated state and artifacts are ignored by Git.
 
 ## Near-term milestones
 
-1. Add the experiment-run state machine and enforce final-holdout closure.
-2. Add structured run manifests and cross-lineage telemetry export.
+1. Add a CLI/config loader for creating and transitioning frozen run manifests.
+2. Add provider-neutral prompt construction with information-budget accounting.
 3. Build and freeze the first polyglot image on the experiment host.
 4. Select and implement a preregistered task plug-in, then run container smoke tests.
 5. Only then connect real provider adapters.

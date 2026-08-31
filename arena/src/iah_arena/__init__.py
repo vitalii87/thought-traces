@@ -4,6 +4,7 @@ from .artifacts import ArtifactManifest, ArtifactProvenance, ArtifactStore
 from .budgets import BudgetDelta, BudgetExceeded, BudgetLedger, BudgetLimits, BudgetUsage
 from .domain import ArenaEvent, EventType
 from .events import EventChainError, JsonlEventStore
+from .experiment import ExperimentPhase, ExperimentRunManager, RunManifest, RunState
 from .lifecycle import AttemptLifecycle, AttemptStatus, LifecycleError
 from .fitness import (
     AcceptanceMode,
@@ -33,6 +34,7 @@ from .tasking import (
     PromotionRule,
     SuiteKind,
 )
+from .telemetry import TelemetryExport, TelemetryExporter
 
 __all__ = [
     "ArenaEvent",
@@ -49,6 +51,8 @@ __all__ = [
     "BudgetUsage",
     "EventChainError",
     "EventType",
+    "ExperimentPhase",
+    "ExperimentRunManager",
     "FitnessPolicy",
     "FitnessVector",
     "JsonlEventStore",
@@ -70,7 +74,11 @@ __all__ = [
     "RuntimeRequest",
     "RuntimeResult",
     "RuntimeRole",
+    "RunManifest",
+    "RunState",
     "ScriptedRuntime",
     "SuiteKind",
+    "TelemetryExport",
+    "TelemetryExporter",
     "WorkspaceError",
 ]

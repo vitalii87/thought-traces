@@ -11,6 +11,7 @@ from .docker_runtime import DockerRuntime
 from .providers import DecisionContext, ProviderTurn, ScriptedProvider, ToolCall
 from .runtime import RuntimeLimits, RuntimeRequest, RuntimeRole
 from .sessions import SessionLimits
+from .telemetry import TelemetryExporter
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -40,6 +41,14 @@ def _parser() -> argparse.ArgumentParser:
     docker_check.add_argument("--image", required=True)
     docker_check.add_argument("--docker-binary", default="docker")
     docker_check.add_argument("--container-user", default="1000:1000")
+
+    export = subparsers.add_parser(
+        "export-telemetry",
+        help="export validated cross-lineage events and numeric evaluation metrics",
+    )
+    export.add_argument("--state-dir", type=Path, required=True)
+    export.add_argument("--output-dir", type=Path, required=True)
+    export.add_argument("--lineage-id", action="append", required=True)
     return parser
 
 
@@ -146,6 +155,17 @@ def main() -> int:
     args = _parser().parse_args()
     if args.command == "docker-check":
         return _docker_check(args.image, args.docker_binary, args.container_user)
+
+    if args.command == "export-telemetry":
+        exported = TelemetryExporter(args.state_dir).export_bundle(
+            args.lineage_id,
+            args.output_dir,
+        )
+        print(
+            f"exported id={exported.export_id} events={exported.event_rows} "
+            f"metrics={exported.metric_rows} path={exported.path}"
+        )
+        return 0
 
     controller = ArenaController(args.state_dir)
 
