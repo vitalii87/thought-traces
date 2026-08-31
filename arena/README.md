@@ -49,6 +49,9 @@ The Python package now provides:
 - content-and-provenance-addressed accepted-candidate artifacts;
 - a frozen experiment-run state machine with a one-shot final-holdout gate;
 - validated cross-lineage event and long-form metric exports;
+- strict TOML run configuration and CLI lifecycle control;
+- deterministic information-budgeted prompts with structured improvement claims;
+- a sequential rotating coordinator for independent lineage turns;
 - a CLI for creating a lineage, verifying telemetry, and running a free local dry run;
 - dependency-free unit tests.
 
@@ -59,6 +62,8 @@ The container recipe and operational notes are in [`docker/README.md`](docker/RE
 The world-independent task boundary, curriculum rules, fitness policy, and artifact requirements are documented in [`TASK_PLUGINS.md`](TASK_PLUGINS.md).
 
 Run freezing, holdout access control, and analysis exports are documented in [`EXPERIMENT_RUNS.md`](EXPERIMENT_RUNS.md).
+
+Configuration, prompt fairness, crash recovery, and lineage scheduling are documented in [`OPTIMIZATION_CONTROL.md`](OPTIMIZATION_CONTROL.md).
 
 ## Planned architecture
 
@@ -110,8 +115,8 @@ Generated state and artifacts are ignored by Git.
 
 ## Near-term milestones
 
-1. Add a CLI/config loader for creating and transitioning frozen run manifests.
-2. Add provider-neutral prompt construction with information-budget accounting.
+1. Persist coordinator epoch/disposition state and connect it to curriculum transitions.
+2. Add action-budget accounting for changed bytes and files.
 3. Build and freeze the first polyglot image on the experiment host.
 4. Select and implement a preregistered task plug-in, then run container smoke tests.
 5. Only then connect real provider adapters.

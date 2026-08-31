@@ -167,7 +167,10 @@ class ArenaController:
             return AttemptRunResult(False, generation, {}, outcome, archived.files_path)
 
         workspace = manager.submit(workspace)
-        emit(EventType.CANDIDATE_SUBMITTED, {"summary": outcome.reason})
+        emit(
+            EventType.CANDIDATE_SUBMITTED,
+            {"summary": outcome.reason, "claim": outcome.claim},
+        )
         try:
             evaluation = dict(evaluator(workspace.files_path))
         except Exception as error:

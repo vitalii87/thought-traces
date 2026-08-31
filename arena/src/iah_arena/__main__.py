@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 from dataclasses import asdict
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -8,8 +9,10 @@ from tempfile import TemporaryDirectory
 from .budgets import BudgetLedger, BudgetLimits
 from .controller import ArenaController
 from .docker_runtime import DockerRuntime
+from .experiment import ExperimentRunManager
 from .providers import DecisionContext, ProviderTurn, ScriptedProvider, ToolCall
 from .runtime import RuntimeLimits, RuntimeRequest, RuntimeRole
+from .run_config import RunConfigLoader
 from .sessions import SessionLimits
 from .telemetry import TelemetryExporter
 
@@ -49,7 +52,62 @@ def _parser() -> argparse.ArgumentParser:
     export.add_argument("--state-dir", type=Path, required=True)
     export.add_argument("--output-dir", type=Path, required=True)
     export.add_argument("--lineage-id", action="append", required=True)
+
+    create_run = subparsers.add_parser(
+        "create-run",
+        help="freeze a TOML run configuration into a new experiment run",
+    )
+    create_run.add_argument("--state-dir", type=Path, required=True)
+    create_run.add_argument("--config", type=Path, required=True)
+
+    status = subparsers.add_parser("run-status", help="show verified experiment-run state")
+    _add_run_arguments(status)
+
+    start_run = subparsers.add_parser("start-run", help="enter the optimization phase")
+    _add_run_arguments(start_run, revision=True)
+
+    close_run = subparsers.add_parser(
+        "close-run-optimization",
+        help="irreversibly close the optimization phase",
+    )
+    _add_run_arguments(close_run, revision=True)
+
+    open_holdout = subparsers.add_parser(
+        "open-run-holdout",
+        help="open one-shot final-holdout access",
+    )
+    _add_run_arguments(open_holdout, revision=True)
+
+    recover = subparsers.add_parser(
+        "recover-run-state",
+        help="restore state.json from the last hash-chained state commit",
+    )
+    _add_run_arguments(recover)
+
+    reserve = subparsers.add_parser(
+        "reserve-holdout",
+        help="reserve one final artifact for a lineage",
+    )
+    _add_run_arguments(reserve, revision=True)
+    reserve.add_argument("--lineage-id", required=True)
+    reserve.add_argument("--artifact-id", required=True)
+
+    record = subparsers.add_parser(
+        "record-holdout",
+        help="record the hash of a reserved final-holdout result",
+    )
+    _add_run_arguments(record, revision=True)
+    record.add_argument("--lineage-id", required=True)
+    record.add_argument("--reservation-token", required=True)
+    record.add_argument("--result-sha256", required=True)
     return parser
+
+
+def _add_run_arguments(parser: argparse.ArgumentParser, *, revision: bool = False) -> None:
+    parser.add_argument("--state-dir", type=Path, required=True)
+    parser.add_argument("--experiment-id", required=True)
+    if revision:
+        parser.add_argument("--expected-revision", type=int, required=True)
 
 
 def _dry_run(controller: ArenaController, lineage_id: str) -> int:
@@ -74,7 +132,19 @@ def _dry_run(controller: ArenaController, lineage_id: str) -> int:
             ProviderTurn(tool_calls=(ToolCall("3", "run_public_tests", {}),)),
             ProviderTurn(
                 tool_calls=(
-                    ToolCall("4", "submit_candidate", {"summary": "dry-run upgrade"}),
+                    ToolCall(
+                        "4",
+                        "submit_candidate",
+                        {
+                            "claim": {
+                                "bottleneck": "primitive marker",
+                                "hypothesis": "replacement satisfies the dry-run evaluator",
+                                "changes": ["replace solver marker"],
+                                "expected_effect": "public and selection checks pass",
+                                "risks": [],
+                            }
+                        },
+                    ),
                 )
             ),
         )
@@ -165,6 +235,53 @@ def main() -> int:
             f"exported id={exported.export_id} events={exported.event_rows} "
             f"metrics={exported.metric_rows} path={exported.path}"
         )
+        return 0
+    if args.command == "create-run":
+        loaded = RunConfigLoader().load(args.config)
+        manager = ExperimentRunManager(args.state_dir, loaded.manifest.experiment_id)
+        state = manager.create(loaded.manifest)
+        print(
+            f"created experiment={loaded.manifest.experiment_id} "
+            f"manifest={loaded.manifest.digest} revision={state.revision}"
+        )
+        return 0
+    if args.command in {
+        "run-status",
+        "start-run",
+        "close-run-optimization",
+        "open-run-holdout",
+        "recover-run-state",
+        "reserve-holdout",
+        "record-holdout",
+    }:
+        manager = ExperimentRunManager(args.state_dir, args.experiment_id)
+        if args.command == "run-status":
+            print(json.dumps(manager.state().as_dict(), indent=2, sort_keys=True))
+            return 0
+        if args.command == "start-run":
+            state = manager.start_optimization(expected_revision=args.expected_revision)
+        elif args.command == "close-run-optimization":
+            state = manager.close_optimization(expected_revision=args.expected_revision)
+        elif args.command == "open-run-holdout":
+            state = manager.open_holdout(expected_revision=args.expected_revision)
+        elif args.command == "recover-run-state":
+            state = manager.recover_state()
+        elif args.command == "reserve-holdout":
+            reservation = manager.reserve_holdout(
+                args.lineage_id,
+                args.artifact_id,
+                expected_revision=args.expected_revision,
+            )
+            print(json.dumps(reservation.as_dict(), indent=2, sort_keys=True))
+            return 0
+        else:
+            state = manager.record_holdout_result(
+                args.lineage_id,
+                args.reservation_token,
+                args.result_sha256,
+                expected_revision=args.expected_revision,
+            )
+        print(json.dumps(state.as_dict(), indent=2, sort_keys=True))
         return 0
 
     controller = ArenaController(args.state_dir)

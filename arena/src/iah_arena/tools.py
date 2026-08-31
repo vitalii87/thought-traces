@@ -4,6 +4,7 @@ import hashlib
 from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Mapping
 
+from .prompts import ImprovementClaim
 from .providers import ToolCall, ToolDefinition, ToolResult
 
 
@@ -77,8 +78,27 @@ CANONICAL_TOOLS: tuple[ToolDefinition, ...] = (
         description="Submit the tested transactional workspace for independent evaluation.",
         input_schema={
             "type": "object",
-            "properties": {"summary": {"type": "string"}},
-            "required": ["summary"],
+            "properties": {
+                "claim": {
+                    "type": "object",
+                    "properties": {
+                        "bottleneck": {"type": "string"},
+                        "hypothesis": {"type": "string"},
+                        "changes": {"type": "array", "items": {"type": "string"}},
+                        "expected_effect": {"type": "string"},
+                        "risks": {"type": "array", "items": {"type": "string"}},
+                    },
+                    "required": [
+                        "bottleneck",
+                        "hypothesis",
+                        "changes",
+                        "expected_effect",
+                        "risks",
+                    ],
+                    "additionalProperties": False,
+                }
+            },
+            "required": ["claim"],
             "additionalProperties": False,
         },
     ),
@@ -112,6 +132,7 @@ class WorkspaceToolExecutor:
         self.submitted = False
         self.aborted = False
         self.terminal_reason: str | None = None
+        self.submission_claim: ImprovementClaim | None = None
 
     def execute(self, call: ToolCall) -> ToolResult:
         if self.submitted or self.aborted:
@@ -179,7 +200,9 @@ class WorkspaceToolExecutor:
         occurrences = content.count(old)
         if occurrences != 1:
             raise ToolExecutionError(f"expected one occurrence, found {occurrences}")
-        return self._tool_write_file({"path": arguments["path"], "content": content.replace(old, new)})
+        return self._tool_write_file(
+            {"path": arguments["path"], "content": content.replace(old, new)}
+        )
 
     def _tool_delete_file(self, arguments: Mapping[str, Any]) -> Mapping[str, Any]:
         self._require_keys(arguments, {"path"})
@@ -198,12 +221,17 @@ class WorkspaceToolExecutor:
         return result
 
     def _tool_submit_candidate(self, arguments: Mapping[str, Any]) -> Mapping[str, Any]:
-        self._require_keys(arguments, {"summary"})
+        self._require_keys(arguments, {"claim"})
         if not self.last_public_tests_passed:
             raise ToolExecutionError("public tests must pass after the last workspace change")
+        claim_value = arguments["claim"]
+        if not isinstance(claim_value, Mapping):
+            raise ToolExecutionError("claim must be an object")
+        claim = ImprovementClaim.from_mapping(claim_value)
         self.submitted = True
-        self.terminal_reason = str(arguments["summary"])
-        return {"submitted": True, "summary": self.terminal_reason}
+        self.submission_claim = claim
+        self.terminal_reason = f"{claim.bottleneck}: {claim.hypothesis}"
+        return {"submitted": True, "claim": claim.as_dict()}
 
     def _tool_abort_attempt(self, arguments: Mapping[str, Any]) -> Mapping[str, Any]:
         self._require_keys(arguments, {"reason"})

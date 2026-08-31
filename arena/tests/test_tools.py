@@ -24,17 +24,29 @@ class WorkspaceToolExecutorTests(unittest.TestCase):
     def call(self, name: str, arguments: dict[str, object]):
         return self.executor.execute(ToolCall("call", name, arguments))
 
+    @staticmethod
+    def claim() -> dict[str, object]:
+        return {
+            "claim": {
+                "bottleneck": "old marker",
+                "hypothesis": "new marker passes",
+                "changes": ["replace marker"],
+                "expected_effect": "tests pass",
+                "risks": [],
+            }
+        }
+
     def test_path_traversal_is_rejected(self) -> None:
         result = self.call("read_file", {"path": "../secret.txt"})
         self.assertTrue(result.is_error)
 
     def test_submission_requires_fresh_passing_tests(self) -> None:
-        self.assertTrue(self.call("submit_candidate", {"summary": "premature"}).is_error)
+        self.assertTrue(self.call("submit_candidate", self.claim()).is_error)
         self.assertFalse(
             self.call("write_file", {"path": "solver.txt", "content": "new\n"}).is_error
         )
         self.assertFalse(self.call("run_public_tests", {}).is_error)
-        self.assertFalse(self.call("submit_candidate", {"summary": "ready"}).is_error)
+        self.assertFalse(self.call("submit_candidate", self.claim()).is_error)
         self.assertTrue(self.executor.submitted)
 
     def test_change_invalidates_previous_public_test(self) -> None:
@@ -42,7 +54,7 @@ class WorkspaceToolExecutorTests(unittest.TestCase):
         self.call("run_public_tests", {})
         self.call("write_file", {"path": "notes.txt", "content": "changed"})
 
-        result = self.call("submit_candidate", {"summary": "stale test"})
+        result = self.call("submit_candidate", self.claim())
         self.assertTrue(result.is_error)
 
 

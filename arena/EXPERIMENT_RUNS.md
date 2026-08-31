@@ -27,7 +27,7 @@ draft
 
 Development, selection, anchor, and regression suites are available only during `optimization`. The final holdout is available only during `holdout_open`. No suite is available after completion through this gate.
 
-Every mutation requires the caller's expected state revision. This detects stale controllers. Each resulting state is hashed into the append-only run event chain, so accidental edits to `state.json` are detected.
+Every mutation requires the caller's expected state revision. This detects stale controllers. A non-blocking OS file lock prevents simultaneous controllers from interleaving writes. Each resulting state snapshot is hashed into the append-only run event chain, so accidental edits to `state.json` are detected and the cache can be recovered after a crash.
 
 ## One-shot final holdout
 

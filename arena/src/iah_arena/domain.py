@@ -11,6 +11,7 @@ class EventType(StrEnum):
     EXPERIMENT_CREATED = "experiment_created"
     EXPERIMENT_PHASE_CHANGED = "experiment_phase_changed"
     RUN_STATE_COMMITTED = "run_state_committed"
+    RUN_STATE_RECOVERED = "run_state_recovered"
     HOLDOUT_RESERVED = "holdout_reserved"
     HOLDOUT_RECORDED = "holdout_recorded"
     LINEAGE_CREATED = "lineage_created"

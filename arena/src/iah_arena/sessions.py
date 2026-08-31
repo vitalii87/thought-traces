@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 from typing import Any, Callable, Mapping, Sequence
 
@@ -33,6 +34,7 @@ class SessionOutcome:
     provider_turns: int
     tool_calls: int
     reason: str | None
+    claim: Mapping[str, Any] | None = None
 
 
 class DecisionSessionRunner:
@@ -52,6 +54,10 @@ class DecisionSessionRunner:
         self.limits = limits
 
     def run(self, context: DecisionContext) -> SessionOutcome:
+        if context.prompt_text is not None:
+            actual_hash = hashlib.sha256(context.prompt_text.encode("utf-8")).hexdigest()
+            if context.prompt_sha256 != actual_hash:
+                raise SessionError("decision prompt hash mismatch")
         provider_turns = 0
         tool_calls = 0
         previous_response_id: str | None = None
@@ -65,7 +71,12 @@ class DecisionSessionRunner:
 
             self.event_sink(
                 EventType.PROVIDER_CALL_STARTED,
-                {"provider": self.provider.provider_name, "model_id": self.provider.model_id},
+                {
+                    "provider": self.provider.provider_name,
+                    "model_id": self.provider.model_id,
+                    "prompt_sha256": context.prompt_sha256,
+                    "information_counts": dict(context.information_counts),
+                },
             )
             if previous_response_id is None:
                 turn = self.provider.start(context, CANONICAL_TOOLS)
@@ -96,6 +107,9 @@ class DecisionSessionRunner:
                     provider_turns=provider_turns,
                     tool_calls=tool_calls,
                     reason=self.executor.terminal_reason or turn.final_text,
+                    claim=None
+                    if self.executor.submission_claim is None
+                    else self.executor.submission_claim.as_dict(),
                 )
 
             if tool_calls + len(turn.tool_calls) > self.limits.max_tool_calls:
@@ -130,6 +144,9 @@ class DecisionSessionRunner:
                         provider_turns=provider_turns,
                         tool_calls=tool_calls,
                         reason=self.executor.terminal_reason,
+                        claim=None
+                        if self.executor.submission_claim is None
+                        else self.executor.submission_claim.as_dict(),
                     )
             results = tuple(current_results)
 

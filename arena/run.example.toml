@@ -1,0 +1,28 @@
+schema_version = 1
+
+[run]
+experiment_id = "pilot-001"
+protocol_version = "draft-v1"
+protocol_path = "../experiments/001-independent-self-improving-lineages/README.md"
+task_id = "replace-after-preregistration"
+task_version = "v1"
+evaluator_version = "v1"
+# Replace both placeholder digests before creating a real run.
+curriculum_digest = "0000000000000000000000000000000000000000000000000000000000000000"
+environment_digest = "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+arena_commit = "replace-with-git-commit"
+
+[[lineages]]
+lineage_id = "gpt-lineage"
+optimizer_id = "openai/replace-with-model-snapshot"
+random_seed = 1001
+
+[[lineages]]
+lineage_id = "gemini-lineage"
+optimizer_id = "google/replace-with-model-snapshot"
+random_seed = 1002
+
+[[lineages]]
+lineage_id = "claude-lineage"
+optimizer_id = "anthropic/replace-with-model-snapshot"
+random_seed = 1003

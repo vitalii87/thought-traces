@@ -23,6 +23,7 @@ def manifest() -> RunManifest:
         curriculum_digest="b" * 64,
         environment_digest="sha256:" + "c" * 64,
         arena_commit="abc1234",
+        configuration_sha256="f" * 64,
         lineage_ids=("lineage-a", "lineage-b"),
         optimizer_ids={"lineage-a": "provider/a", "lineage-b": "provider/b"},
         random_seeds={"lineage-a": 1, "lineage-b": 2},
@@ -86,6 +87,10 @@ class ExperimentRunTests(unittest.TestCase):
         self.manager.state_path.write_text(json.dumps(state), encoding="utf-8")
         with self.assertRaises(RuntimeError):
             self.manager.state()
+
+        recovered = self.manager.recover_state()
+        self.assertEqual(recovered.phase, ExperimentPhase.DRAFT)
+        self.assertEqual(self.manager.state(), recovered)
 
 
 if __name__ == "__main__":

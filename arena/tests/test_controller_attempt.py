@@ -36,7 +36,19 @@ class ArenaControllerAttemptTests(unittest.TestCase):
                     ),
                     ProviderTurn(
                         tool_calls=(
-                            ToolCall("submit", "submit_candidate", {"summary": "better"}),
+                            ToolCall(
+                                "submit",
+                                "submit_candidate",
+                                {
+                                    "claim": {
+                                        "bottleneck": "primitive marker",
+                                        "hypothesis": "replacement improves fitness",
+                                        "changes": ["replace marker"],
+                                        "expected_effect": "pass evaluator",
+                                        "risks": [],
+                                    }
+                                },
+                            ),
                         )
                     ),
                 )

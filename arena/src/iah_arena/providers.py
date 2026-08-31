@@ -36,6 +36,10 @@ class DecisionContext:
     metrics: Mapping[str, Any]
     budget_remaining: Mapping[str, int]
     workspace_summary: Mapping[str, Any]
+    stage: Mapping[str, Any] = field(default_factory=dict)
+    prompt_text: str | None = None
+    prompt_sha256: str | None = None
+    information_counts: Mapping[str, int] = field(default_factory=dict)
 
 
 @dataclass(frozen=True, slots=True)

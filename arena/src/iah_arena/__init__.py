@@ -2,10 +2,19 @@
 
 from .artifacts import ArtifactManifest, ArtifactProvenance, ArtifactStore
 from .budgets import BudgetDelta, BudgetExceeded, BudgetLedger, BudgetLimits, BudgetUsage
+from .coordinator import LineageDisposition, SequentialLineageCoordinator, StepStatus
 from .domain import ArenaEvent, EventType
 from .events import EventChainError, JsonlEventStore
 from .experiment import ExperimentPhase, ExperimentRunManager, RunManifest, RunState
 from .lifecycle import AttemptLifecycle, AttemptStatus, LifecycleError
+from .locking import FileLock, LockUnavailable
+from .prompts import (
+    ImprovementClaim,
+    ImprovementPromptBuilder,
+    InformationBudget,
+    InformationBudgetExceeded,
+    PromptEnvelope,
+)
 from .fitness import (
     AcceptanceMode,
     FitnessPolicy,
@@ -25,6 +34,7 @@ from .runtime import (
     RuntimeRole,
     ScriptedRuntime,
 )
+from .run_config import LoadedRunConfig, RunConfigLoader
 from .workspace import LineageWorkspaceManager, WorkspaceError
 from .tasking import (
     BenchmarkSuite,
@@ -49,21 +59,30 @@ __all__ = [
     "BudgetLedger",
     "BudgetLimits",
     "BudgetUsage",
+    "FileLock",
     "EventChainError",
     "EventType",
     "ExperimentPhase",
     "ExperimentRunManager",
     "FitnessPolicy",
     "FitnessVector",
+    "ImprovementClaim",
+    "ImprovementPromptBuilder",
+    "InformationBudget",
+    "InformationBudgetExceeded",
     "JsonlEventStore",
     "JsonRuntimeEvaluator",
     "LifecycleError",
     "LineageWorkspaceManager",
+    "LineageDisposition",
+    "LoadedRunConfig",
+    "LockUnavailable",
     "MetricDirection",
     "MetricSpec",
     "Mount",
     "ParetoArchive",
     "PolicyEvaluator",
+    "PromptEnvelope",
     "BenchmarkSuite",
     "CurriculumScheduler",
     "CurriculumSpec",
@@ -75,8 +94,11 @@ __all__ = [
     "RuntimeResult",
     "RuntimeRole",
     "RunManifest",
+    "RunConfigLoader",
     "RunState",
     "ScriptedRuntime",
+    "SequentialLineageCoordinator",
+    "StepStatus",
     "SuiteKind",
     "TelemetryExport",
     "TelemetryExporter",
