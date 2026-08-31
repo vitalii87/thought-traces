@@ -3,6 +3,12 @@ schema_version = 1
 state_dir = "state"
 artifact_dir = "artifacts"
 
+[docker]
+binary = "docker"
+# Set after building the polyglot image; tags are intentionally rejected.
+# image = "sha256:<64-hex-character-local-image-id>"
+container_user = "1000:1000"
+
 [decision_epoch]
 max_provider_turns = 8
 max_tool_calls = 20
@@ -21,6 +27,8 @@ memory_mb = 256
 pids = 32
 timeout_seconds = 30
 network = "none"
+tmpfs_mb = 128
+max_output_bytes = 256_000
 
 [workshop]
 cpus = 2.0
@@ -28,3 +36,5 @@ memory_mb = 4_096
 pids = 256
 command_timeout_seconds = 300
 network = "none"
+tmpfs_mb = 512
+max_output_bytes = 1_000_000

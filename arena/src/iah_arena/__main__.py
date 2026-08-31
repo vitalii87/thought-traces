@@ -7,7 +7,9 @@ from tempfile import TemporaryDirectory
 
 from .budgets import BudgetLedger, BudgetLimits
 from .controller import ArenaController
+from .docker_runtime import DockerRuntime
 from .providers import DecisionContext, ProviderTurn, ScriptedProvider, ToolCall
+from .runtime import RuntimeLimits, RuntimeRequest, RuntimeRole
 from .sessions import SessionLimits
 
 
@@ -30,6 +32,14 @@ def _parser() -> argparse.ArgumentParser:
     )
     dry_run.add_argument("--state-dir", type=Path, required=True)
     dry_run.add_argument("--lineage-id", default="dry-run-001")
+
+    docker_check = subparsers.add_parser(
+        "docker-check",
+        help="run the toolchain report inside a pinned polyglot image",
+    )
+    docker_check.add_argument("--image", required=True)
+    docker_check.add_argument("--docker-binary", default="docker")
+    docker_check.add_argument("--container-user", default="1000:1000")
     return parser
 
 
@@ -100,8 +110,43 @@ def _dry_run(controller: ArenaController, lineage_id: str) -> int:
     return 0 if result.accepted else 1
 
 
+def _docker_check(image: str, docker_binary: str, container_user: str) -> int:
+    runtime = DockerRuntime(
+        image,
+        docker_binary=docker_binary,
+        container_user=container_user,
+    )
+    limits = RuntimeLimits(
+        cpus=1,
+        memory_mb=512,
+        pids=32,
+        timeout_seconds=30,
+        tmpfs_mb=64,
+        max_output_bytes=64_000,
+    )
+    request = RuntimeRequest(
+        ("iah-toolchain-report",),
+        RuntimeRole.JUDGE,
+        workspace_read_only=True,
+    )
+    with TemporaryDirectory(prefix="iah-docker-check-") as temporary:
+        result = runtime.run(Path(temporary), request, limits)
+    if result.stdout:
+        print(result.stdout.rstrip())
+    if result.stderr:
+        print(result.stderr.rstrip())
+    print(
+        f"docker-check succeeded={result.succeeded} timed_out={result.timed_out} "
+        f"duration_ms={result.duration_ms}"
+    )
+    return 0 if result.succeeded else 1
+
+
 def main() -> int:
     args = _parser().parse_args()
+    if args.command == "docker-check":
+        return _docker_check(args.image, args.docker_binary, args.container_user)
+
     controller = ArenaController(args.state_dir)
 
     if args.command == "init-lineage":

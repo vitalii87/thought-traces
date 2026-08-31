@@ -42,10 +42,14 @@ The Python package now provides:
 - canonical, path-confined file/test/submit tools;
 - a bounded provider tool loop and deterministic fake provider;
 - end-to-end candidate submission and evaluator-controlled acceptance;
+- a Docker runtime boundary for isolated workshop and read-only judge commands;
+- a common polyglot image recipe that permits language migration;
 - a CLI for creating a lineage, verifying telemetry, and running a free local dry run;
 - dependency-free unit tests.
 
-No task-specific score, preferred language, provider SDK, or container runtime is embedded in this layer.
+No task-specific score, preferred language, or provider SDK is embedded in this layer.
+
+The container recipe and operational notes are in [`docker/README.md`](docker/README.md). Docker image tags are rejected at runtime: the experiment must use a registry digest or local SHA-256 image ID.
 
 ## Planned architecture
 
@@ -89,14 +93,15 @@ python -m unittest discover -s tests -v
 python -m iah_arena init-lineage --state-dir state --lineage-id demo-001 --origin local-dry-run
 python -m iah_arena verify-events --state-dir state --lineage-id demo-001
 python -m iah_arena dry-run --state-dir state --lineage-id dry-run-001
+python -m iah_arena docker-check --image "sha256:<local-image-id>"
 ```
 
 Generated state and artifacts are ignored by Git.
 
 ## Near-term milestones
 
-1. Add a hardened local workshop runner with pinned polyglot toolchains.
-2. Add fresh judge execution and resource collection.
-3. Define the task/curriculum plug-in boundary without selecting the world itself.
-4. Add artifact manifests and richer statistical telemetry.
+1. Define the task/curriculum plug-in boundary without selecting the world itself.
+2. Add artifact manifests and richer statistical telemetry.
+3. Build and freeze the first polyglot image on the experiment host.
+4. Connect the runtime adapters to that task plug-in and run container smoke tests.
 5. Only then connect real provider adapters.
