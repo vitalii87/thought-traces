@@ -18,7 +18,7 @@ The **Intelligence Attractor Hypothesis (IAH)** proposes that, for some classes 
 
 The hypothesis is stronger than the general observation that constraints sometimes make solutions similar. Its central proposal is that optimization may progressively remove degrees of freedom that are historically arbitrary while increasing the proportion of functionally important properties determined by the task, objective, environment, available information, resource constraints, computation, causality, and physical reality.
 
-This narrowing may occur at several levels: external outcomes, policies, representations, algorithms, cognitive architectures, and—where those variables are accessible to optimization—computational or physical implementation. Convergence does not imply literal identity. Systems may retain different syntax, encodings, geometries, or interchangeable components while sharing the functional properties required for near-frontier performance.
+This narrowing may occur at several levels: external outcomes, policies, representations, algorithms, cognitive architectures, and—where those variables are accessible to optimization—computational or physical implementation. Functional convergence does not imply literal identity: systems may retain different syntax, encodings, geometries, or interchangeable components while sharing the properties required for near-frontier performance. Stronger claims about physical realization are separated from the empirical core.
 
 IAH contains an empirical core, architectural and recursive extensions, and stronger limiting conjectures. These levels are intentionally separated. A failure of a stronger claim does not rescue or falsify a weaker claim, and expanding the accessible design space does not revise a negative result obtained in a previously specified space.
 
@@ -58,14 +58,16 @@ where:
 
 If the environment is path-dependent, \(e_t\) must include the causally relevant history or a sufficient representation of it.
 
+The laboratory notation \(t\) assumes a stated clock and reference frame. Relativistic and distributed causal-policy extensions are treated separately in [Speculative Limits](speculative-limits.md); they are not required for the empirical program.
+
 Three additional objects are specified separately:
 
 $$
-Q,\qquad S_i,\qquad \mathcal X_n.
+Q,\qquad O_i,\qquad \mathcal X_n.
 $$
 
 - \(Q\) is the objective or evaluation rule;
-- \(S_i\) is the origin-dependent **Salt** of system \(i\);
+- \(O_i\) is the origin vector of system \(i\);
 - \(\mathcal X_n\) is a prespecified admissible design space.
 
 Keeping these objects separate prevents historical origin, environmental uncertainty, and normative evaluation from being conflated.
@@ -109,23 +111,6 @@ $$
 
 The relevant object for dynamic problems is generally a policy evaluated over future trajectories, not an isolated immediate action.
 
-### Pursuit analogy
-
-Imagine several snakes pursuing the same moving mouse. They begin at different positions and headings, so their early paths strongly reflect their origins. If the snakes share the same physical constraints and repeatedly correct their motion against the same target dynamics, the later portions of their paths may become increasingly similar: the target and the physics of pursuit explain more of the trajectory, while the starting position explains less.
-
-The correspondence is:
-
-- a snake is an independently optimized lineage;
-- its initial position and body plan are origin and initial architecture;
-- its physical limits are the admissible design space and resource constraints;
-- course correction is iterative optimization;
-- the moving mouse is a changing attainable frontier;
-- the trail is the lineage's functional and architectural history.
-
-The trails need not overlap in absolute coordinates. What may converge is the pursuit law: relative angle, curvature, prediction, response to target motion, and resource-efficient control. Likewise, software lineages need not produce textually identical code to discover the same functional principles.
-
-The analogy is illustrative, not evidence for IAH. Ordinary optimization can also generate similar pursuit paths. The empirical content of IAH begins only when the experiment measures whether functionally relevant diversity and origin-attributable variation systematically contract near a shared frontier, and whether this contraction recurs after prespecified changes in the target or binding constraints.
-
 ## 4. Levels of Functional Convergence
 
 ### Outcome convergence
@@ -150,7 +135,7 @@ When architecture materially affects performance or cost and is itself an admiss
 
 If deeper implementation variables are causally accessible and affect the objective, optimization may act on topology, communication, memory hierarchy, computational substrate, energy use, latency, reliability, and organization of matter.
 
-None of these levels predicts literal identity. Convergence is assessed modulo prespecified task-irrelevant symmetries and implementation differences.
+None of these empirically accessible levels predicts literal identity. Convergence is assessed modulo prespecified task-irrelevant symmetries and implementation differences.
 
 ## 5. Outcome Optimality and System Optimality
 
@@ -220,7 +205,7 @@ Under fixed \(\Omega_t\), \(Q\), and \(\mathcal X_n\), the causal influence of c
 
 E1 and E2 do not imply each other. A narrow region may retain origin-dependent variation, while origin dependence may be weak even when several functionally distinct near-optimal regions exist.
 
-Detailed operational definitions and experiments are provided in [Experimental Program for the Intelligence Attractor Hypothesis](experimental-program.md). Origin variables and confounds are treated in [Salt Sensitivity](empirical-evidence-salt-sensitivity.md).
+Detailed operational definitions and experiments are provided in [Experimental Program for the Intelligence Attractor Hypothesis](experimental-program.md). Origin variables and confounds are treated in [Origin Dependence and Attenuation](origin-dependence-and-attenuation.md).
 
 ## 8. Architectural Extension
 
@@ -306,7 +291,7 @@ For a stated limiting accessible design space, context, objective, horizon, and 
 
 U2 is not a theorem of arbitrary optimization. It is a strong limiting conjecture. Persistent functionally inequivalent global optima under the specified conditions count against it without necessarily falsifying E1, E2, or D1.
 
-Definitions and counterexamples are developed in [Relational Narrowing and Strong Functional Uniqueness](relational-narrowing-and-strong-functional-uniqueness.md).
+Definitions and counterexamples are developed in [Relational Narrowing and Strong Functional Uniqueness](relational-narrowing-and-strong-functional-uniqueness.md). The stronger conjecture of one substantive physical realization and its relativistic formulation are preserved separately in [Speculative Limits](speculative-limits.md).
 
 ## 11. Causal and Predictive Knowledge
 
@@ -341,15 +326,14 @@ IAH is not a single linear ladder. Its empirical claims and limiting conjectures
 | R1 — Cross-Space Recurrence | Does narrowing recur across richer intervention spaces? | Recursive theoretical/empirical extension |
 | U1 — Generic Functional Concentration | Do some non-degenerate domains approach one functional class? | Strong domain-conditional hypothesis |
 | U2 — Strong-Limit Functional Uniqueness | Does a specified limiting domain admit one optimal functional class? | Strong limiting conjecture |
-| O1 — Objective-Level Convergence | Can objective structures converge? | Underdefined without a meta-objective |
 
-Failure of a stronger or separate branch does not automatically falsify weaker claims. A weak claim cannot be rescued by appealing to a stronger inaccessible level.
+Failure of a stronger or separate branch does not automatically falsify weaker claims. A weak claim cannot be rescued by appealing to a stronger inaccessible level. Absolute physical uniqueness and objective-level convergence remain outside this core claim table because they are not currently scientific hypotheses; see [Speculative Limits](speculative-limits.md).
 
 ## 13. Falsifiability Boundaries
 
 Evidence against E1 includes repeated preregistered cases in which regret decreases without any systematic reduction in functional diameter.
 
-Evidence against E2 includes persistent causal dependence of near-frontier functional properties on controlled Salt perturbations.
+Evidence against E2 includes persistent causal dependence of near-frontier functional properties on controlled origin interventions.
 
 Evidence against D1 includes highly optimized systems that remain functionally unrelated at prespecified mutable internal levels under matched conditions.
 
@@ -365,7 +349,7 @@ A speculative limiting interpretation of IAH asks what would happen if intellige
 
 In that regime, arbitrary historical properties might contribute progressively less to functionally important structure, while information, computation, resources, the objective, and physical constraints contribute more.
 
-This does not imply infinite intelligence, complete prediction, a universal value system, or literal identity of all optimized systems. It also does not imply that the limiting regime is physically reachable.
+The empirical core and U1–U2 do not imply infinite intelligence, complete prediction, a universal value system, or literal architectural identity of all optimized systems. None of these claims implies that the limiting regime is physically reachable.
 
 The strongest possible implication is a regime in which remaining improvement is constrained primarily by irreducible limits of accessible reality rather than correctable deficiencies of the intelligent system. This far-limit interpretation is not required for near-term empirical validation of E1 or E2.
 
@@ -390,8 +374,9 @@ The next step is not to assume universal convergence, but to identify:
 
 See:
 
-- [Salt Sensitivity](empirical-evidence-salt-sensitivity.md)
+- [Origin Dependence and Attenuation](origin-dependence-and-attenuation.md)
 - [Relational Narrowing and Strong Functional Uniqueness](relational-narrowing-and-strong-functional-uniqueness.md)
 - [Recursive Architectural Attractor](recursive-architectural-attractor.md)
 - [Experimental Program](experimental-program.md)
 - [Related Work Map](related-work.md)
+- [Speculative Limits](speculative-limits.md)

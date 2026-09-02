@@ -1,4 +1,4 @@
-# Salt Sensitivity
+# Origin Dependence and Attenuation
 
 ## A Testable Prediction of the Intelligence Attractor Hypothesis
 
@@ -16,31 +16,31 @@
 
 ## 1. Purpose
 
-Present-day AI systems differ for many reasons that are not intrinsic to the task they are asked to solve. The **Salt Sensitivity** hypothesis asks whether the functional influence of those origin-dependent differences decreases as independently optimized systems approach a shared performance frontier.
+Present-day AI systems differ for many reasons that are not intrinsic to the task they are asked to solve. The **Origin Attenuation** hypothesis asks whether the functional influence of those origin-dependent differences decreases as independently optimized systems approach a shared performance frontier.
 
 The hypothesis is not that all agents will produce identical text, code, or architecture. It concerns prespecified functionally important properties after controlling for common inheritance, evaluator bias, and measurement uncertainty.
 
-## 2. Salt as Origin Dependence
+## 2. Origin Variables
 
-**Salt** is shorthand for historically contingent and origin-dependent properties of an agent or optimization run.
+An **origin vector** records the historically contingent properties of an agent or optimization run that the experiment deliberately varies or tracks.
 
 It is a heterogeneous vector rather than a natural scalar:
 
 $$
-S_i=
+O_i=
 (
-S_{initialization},
-S_{seed},
-S_{ordering},
-S_{history},
-S_{ancestry},
-S_{implementation},
-S_{development},
+O_{initialization},
+O_{seed},
+O_{ordering},
+O_{history},
+O_{ancestry},
+O_{implementation},
+O_{development},
 \ldots
 ).
 $$
 
-Depending on the experiment, Salt may include:
+Depending on the experiment, origin variables may include:
 
 - parameter initialization;
 - training seed;
@@ -53,9 +53,9 @@ Depending on the experiment, Salt may include:
 
 The experiment must state in advance which components are varied and which are held constant.
 
-## 3. What Salt Does Not Include
+## 3. What Origin Variables Do Not Include
 
-Salt should not absorb every source of uncertainty.
+The origin vector should not absorb every source of uncertainty.
 
 In particular, it must remain separate from:
 
@@ -69,28 +69,28 @@ In particular, it must remain separate from:
 Conceptually:
 
 $$
-S_i
+O_i
 \neq
 P(\tau\mid\Omega_t,a).
 $$
 
-Salt describes the origin and contingent path of the system. The trajectory distribution describes how the environment may evolve under an action or policy.
+The origin vector describes the origin and contingent path of the system. The trajectory distribution describes how the environment may evolve under an action or policy.
 
-The central question is whether, under matched external conditions, changing \(S_i\) continues to change functionally important properties near the frontier.
+The central question is whether, under matched external conditions, changing \(O_i\) continues to change functionally important properties near the frontier.
 
 ## 4. Central Prediction
 
-Let an optimization process with competence or budget \(c\) produce:
+Let an optimization process run under budget \(b\) and produce:
 
 $$
-X_c(S_i\mid\Omega_t,Q,\mathcal X_n).
+X_b(O_i\mid\Omega_t,Q,\mathcal X_n).
 $$
 
 IAH predicts:
 
 > **Within a fixed context, objective, and prespecified design space, variation in prespecified functional properties attributable to arbitrary origin variables tends to decline as independently optimized systems approach the attainable performance frontier.**
 
-This does not assert that origin dependence always vanishes. Salt may remain influential when:
+This does not assert that origin dependence always vanishes. Origin may remain influential when:
 
 - the objective has several distinct optima;
 - symmetries preserve alternative solutions;
@@ -99,42 +99,42 @@ This does not assert that origin dependence always vanishes. Salt may remain inf
 - several niches are equally competitive;
 - the chosen functional description ignores relevant differences.
 
-## 5. Operational Salt Sensitivity
+## 5. Operational Origin Sensitivity
 
 The earlier expression:
 
 $$
-\frac{\partial Solution}{\partial Salt}
+\frac{\partial Solution}{\partial O}
 $$
 
-is not generally well-defined because Salt contains discrete, continuous, categorical, and historically structured variables.
+is not generally well-defined because origin contains discrete, continuous, categorical, and historically structured variables.
 
-An operational alternative is to compare systems produced under controlled Salt perturbations.
+An operational alternative is to compare systems produced under controlled origin interventions.
 
-For a prespecified functional pseudometric \(d_{F,\ell}\), a provisional sensitivity at optimization level \(c\) is:
+For a prespecified functional pseudometric \(d_{F,\ell}\), a provisional sensitivity at optimization budget \(b\) is:
 
 $$
-SS_{n,\ell}(c)
+OS_{n,\ell}(b)
 =
 \mathbb E
 \left[
 d_{F,\ell}
 \left(
-X_c(S),X_c(S')
+X_b(O),X_b(O')
 \right)
 \right],
 $$
 
 where:
 
-- \(S\) and \(S'\) are controlled origin perturbations;
+- \(O\) and \(O'\) are controlled origin interventions;
 - \(n\) identifies the design space;
 - \(\ell\) identifies the functional level being compared;
 - external context and objective are matched.
 
-Pairwise distance is only one possible estimator. A stronger statistical design may estimate the proportion of variance in predefined functional features causally attributable to Salt while controlling for performance, task instance, model family, and measurement error.
+Pairwise distance is only one possible estimator. A stronger statistical design may estimate the proportion of variance in predefined functional features causally attributable to origin while controlling for performance, task instance, model family, and measurement error.
 
-No universal Salt metric is assumed.
+No universal Origin Sensitivity metric is assumed.
 
 ## 6. Functional Distance
 
@@ -218,9 +218,9 @@ Increasingly informative designs include:
 
 No single experiment establishes the full theory.
 
-## 9. Architectural Salt
+## 9. Architectural Origin Dependence
 
-Initial architecture can itself be part of Salt.
+Initial architecture can itself be an origin variable.
 
 If architecture is fixed, an experiment can only test convergence within that inherited architectural family. If architecture is modifiable, a stronger question becomes available:
 
@@ -245,7 +245,7 @@ A useful initial experiment should:
 1. define a task and evaluation context;
 2. specify the objective and resource accounting;
 3. define the admissible design space;
-4. select controlled Salt variables;
+4. select controlled origin variables;
 5. run independent optimization trajectories;
 6. estimate the attainable frontier or bounds;
 7. preregister functional features and distances;
@@ -257,15 +257,15 @@ Tasks with exhaustively enumerable or provably bounded optima are especially val
 
 ## 11. Falsification and Limitations
 
-Evidence against the Salt Sensitivity hypothesis includes:
+Evidence against the Origin Attenuation hypothesis includes:
 
 - origin variables continuing to explain stable functional differences at matched near-frontier performance;
-- no reduction in Salt-attributable variance as regret decreases;
+- no reduction in origin-attributable variance as regret decreases;
 - convergence disappearing after common-inheritance controls;
 - task constraints explaining less variation than historical origin near the frontier.
 
-A negative result applies to the preregistered task, metric, design space, and Salt intervention. It cannot be dismissed by redefining functional relevance or moving to a deeper design space after seeing the result.
+A negative result applies to the preregistered task, metric, design space, and origin intervention. It cannot be dismissed by redefining functional relevance or moving to a deeper design space after seeing the result.
 
-Salt Sensitivity is a proposed empirical signature of IAH, not yet empirical evidence for it.
+Origin Attenuation is a proposed empirical signature of IAH, not yet empirical evidence for it.
 
 For the wider methodology, see [Experimental Program for the Intelligence Attractor Hypothesis](experimental-program.md).

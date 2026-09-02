@@ -149,7 +149,7 @@ Different lineages independently adopt some of the same bottleneck-removing func
 
 ### H5 — Constraint dependence
 
-Changing which constraints are binding changes the direction or degree of convergence. Convergence should be stronger in a narrow shared constraint regime than in a deliberately permissive regime, unless the task itself imposes a narrow optimum.
+Changing which constraints are binding changes the geometry of the near-optimal set and therefore may change the direction or degree of convergence. No universal monotonic relation between constraint count and convergence is assumed. Each regime must state a task-specific prediction in advance: a constraint may narrow the competitive set, split it into several niches, or leave diversity unchanged.
 
 ## 7. Legitimate alternative outcomes
 
@@ -302,7 +302,7 @@ The tested form of IAH is weakened or falsified in this domain if, with adequate
 
 Negative results must remain in the repository and must not be relabeled as support for a broader inaccessible version of the hypothesis.
 
-## 14. Expected observations if IAH holds
+## 14. Candidate observations if the tested form of IAH holds
 
 The strongest plausible pattern is:
 
@@ -315,7 +315,7 @@ The strongest plausible pattern is:
 
 A likely weaker pattern is non-monotonic: diversity initially expands during exploration, then contracts and plateaus above zero near the frontier.
 
-The curriculum creates a second predicted pattern:
+For a curriculum whose later stages are preregistered to activate a common bottleneck, one candidate pattern is:
 
 $$
 \text{constraint shock}
@@ -325,7 +325,7 @@ $$
 \text{renewed functional convergence}.
 $$
 
-Repeated contraction after independently prespecified shocks would be more informative than a single smooth convergence curve, although it would still be domain-conditional evidence rather than proof of a universal attractor.
+Repeated contraction after independently prespecified bottleneck shocks would be more informative than a single smooth convergence curve, although it would still be domain-conditional evidence rather than proof of a universal attractor. Other constraint changes may instead produce stable branching or divergence and must be reported as such.
 
 ### 14.1 Pursuit analogy
 

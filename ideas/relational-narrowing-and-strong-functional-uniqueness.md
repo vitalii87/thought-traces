@@ -270,6 +270,8 @@ The environment, resources, information, task distribution, and accessible techn
 
 Strong uniqueness therefore concerns at most one specified context and horizon, not a timeless universal machine.
 
+Relativistic event-local notation and distributed causal-policy extensions are treated in [Speculative Limits](speculative-limits.md). They are not needed for the finite laboratory conjecture defined here.
+
 ## 9. Legitimate Counterexamples
 
 Strong Functional Uniqueness is weakened or falsified within a stated domain by:

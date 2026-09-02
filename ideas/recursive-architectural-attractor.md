@@ -265,7 +265,7 @@ R1 does not predict:
 Evidence consistent with R1 would include:
 
 - independently optimized systems converging first in behavior and later in prespecified architectural features as those features become mutable;
-- Salt dependence decreasing at several intervention levels;
+- origin dependence decreasing at several intervention levels;
 - functional diameter decreasing with regret within multiple separately defined spaces;
 - repeated emergence of the same functional architectural constraints across different starting families.
 

@@ -1,45 +1,46 @@
-# Thought Traces
-
-A public archive of ideas, hypotheses, and reflections on intelligence, technology, philosophy, and possible futures.
-
-This repository is a record of intellectual exploration rather than a collection of final answers. Some texts may develop into stronger theories; others may remain snapshots of how an idea looked at a particular moment. Both are valuable.
-
-## Ideas
-
-| Year | Text | Themes | Status |
-| --- | --- | --- | --- |
-| 2026 | [IAH Research Map](ideas/README.md) | reading order, claims, document status | v0.5 |
-| 2026 | [The Intelligence Attractor Hypothesis](ideas/intelligence-attractor-hypothesis.md) | intelligence, optimization, functional convergence | v0.6 research framework |
-| 2026 | [Experimental Program for IAH](ideas/experimental-program.md) | metrics, experiments, statistics, falsification | Proposed methodology |
-| 2026 | [Salt Sensitivity](ideas/empirical-evidence-salt-sensitivity.md) | origin dependence, AI agents, confound control | Testable hypothesis |
-| 2026 | [Relational Narrowing and Strong Functional Uniqueness](ideas/relational-narrowing-and-strong-functional-uniqueness.md) | functional equivalence, Pareto front, uniqueness | Formal extension |
-| 2026 | [Recursive Architectural Attractor](ideas/recursive-architectural-attractor.md) | architecture, self-modification, nested design spaces | Strong extension |
-| 2026 | [Related Work Map](ideas/related-work.md) | literature positioning, novelty boundary | Sources pending |
-
-## Experiments
-
-| ID | Experiment | Question | Status |
-| --- | --- | --- | --- |
-| EXP-001 | [Independent Self-Improving Lineages](experiments/001-independent-self-improving-lineages/README.md) | Do shared binding constraints erase origin dependence near a performance frontier? | Design draft |
-
-## Arena
-
-The provider-neutral laboratory is being developed in [`arena/`](arena/README.md). Its first milestone defines immutable event telemetry, resource and API budgets, lineage state, and the adapter boundary through which external optimizing agents will later operate.
-
-## Repository structure
-
-- `ideas/` — developed hypotheses and essays
-- `experiments/` — concrete protocols, lineage implementations, measurements, and results
-- `arena/` — task-independent orchestration, isolation, telemetry, and provider interfaces
-- `notes/` — shorter or unfinished reflections
-- `templates/` — a reusable format for documenting new ideas
-
-## About the author
+# Intelligence Attractor Hypothesis
 
 **Vitalii Zhyliaiev**
 
-This archive is intended to preserve a public intellectual trail and provide context for future projects, research, and portfolio work.
+This repository develops and tests the **Intelligence Attractor Hypothesis (IAH)**: the proposal that, for some task classes, independently optimized intelligent systems become less functionally diverse and less dependent on arbitrary historical origin as they approach an attainable performance frontier.
 
-## Status and attribution
+The work is in development. No experimental validation, peer review, institutional affiliation, or academic acceptance is claimed.
 
-Unless a text explicitly says otherwise, it represents an evolving personal hypothesis rather than an established scientific result. When discussing or reusing an idea, please attribute the author and link to the relevant document.
+## Start Here
+
+For a research or PhD review, use this order:
+
+1. **[Research Overview](RESEARCH_OVERVIEW.md)** — the thesis, contribution, current evidence status, and scope.
+2. **[Core IAH Theory](ideas/intelligence-attractor-hypothesis.md)** — definitions and claim structure.
+3. **[Experimental Program](ideas/experimental-program.md)** — operationalization, metrics, null hypotheses, and falsifiers.
+4. **[EXP-001: Independent Self-Improving Lineages](experiments/001-independent-self-improving-lineages/README.md)** — the first concrete study.
+5. **[IAH Arena](arena/README.md)** — the experimental infrastructure and current implementation status.
+
+## Current Status
+
+| Component | Status | Next decisive step |
+| --- | --- | --- |
+| Theory | v0.6 research framework | Resolve scope and complete related-work positioning |
+| Experimental methodology | Drafted | Freeze study-specific metrics and statistical models |
+| EXP-001 | Design draft | Select task and evaluator, then preregister |
+| IAH Arena | Core infrastructure operational | Add task plug-in and provider adapters |
+| Evidence | None claimed | Run controlled pilot experiments |
+
+## Repository Map
+
+- **RESEARCH_OVERVIEW.md** — professor-facing summary.
+- **ideas/** — core theory, theoretical extensions, and speculative limits.
+- **experiments/** — preregistered protocols, data, and results.
+- **arena/** — experimental orchestration and isolation code.
+- **notes/** — exploratory material.
+- **templates/** — reusable idea and experiment templates.
+
+The [ideas index](ideas/README.md) separates the empirical core, strong extensions, and speculative limits. The [experiment registry](experiments/README.md) tracks study status. The [arena documentation](arena/README.md) distinguishes implemented infrastructure from planned work.
+
+## Central Empirical Question
+
+> Under what task, objective, constraint, and design-space conditions does functional diversity among independently optimized systems decrease as normalized regret approaches an attainable performance frontier?
+
+## Author and Attribution
+
+This repository preserves the development history of the hypothesis and its experiments. When discussing or reusing the work, please attribute **Vitalii Zhyliaiev** and link to the relevant version or document.

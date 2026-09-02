@@ -36,7 +36,7 @@ All five suite kinds are mandatory:
 - regression: earlier capabilities and forgetting;
 - final holdout: queried only after optimization closes.
 
-The current types freeze their identities. Enforcement of final-holdout opening will be part of the experiment-run state machine rather than candidate code.
+The current types freeze their identities. Final-holdout opening is enforced by the experiment-run state machine rather than candidate code; the trusted suite launcher must use that gate.
 
 ## Fitness and acceptance
 

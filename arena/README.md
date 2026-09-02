@@ -6,7 +6,7 @@ IAH Arena is the task-independent laboratory for running isolated, independently
 
 ## Design boundary
 
-The arena is trusted infrastructure. It will eventually own:
+The arena is trusted infrastructure. Its design boundary includes:
 
 - provider-neutral decision sessions;
 - prompt and tool schemas;

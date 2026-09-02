@@ -48,7 +48,7 @@ Questions:
 - How is functional convergence distinguished from shared ancestry?
 - When does evolution produce similar functions through different mechanisms?
 - How do degeneracy, neutral networks, robustness, and multiple realizability preserve diversity?
-- Can biological methods for detecting convergence inform Salt controls?
+- Can biological methods for detecting convergence inform origin controls?
 
 Convergent evolution supports the plausibility of constraint-induced similarity but does not establish IAH's multi-level or recursive claims.
 

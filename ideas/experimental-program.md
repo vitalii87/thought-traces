@@ -33,7 +33,7 @@ Every study should specify before observing results:
 - objective \(Q\);
 - admissible design space \(\mathcal X_n\);
 - optimization process and budget;
-- Salt variables;
+- origin variables;
 - common-inheritance controls;
 - functional levels and observables;
 - pseudometrics;
@@ -202,34 +202,34 @@ The hypothesis does not require monotonic decrease for every task or every level
 
 ## 7. Origin Dependence
 
-Let \(S\) denote controlled origin variables and let:
+Let \(O\) denote controlled origin variables and let:
 
 $$
-X_c(S\mid\Omega,Q,\mathcal X_n)
+X_b(O\mid\Omega,Q,\mathcal X_n)
 $$
 
-be the system produced at competence or optimization budget \(c\).
+be the system produced under optimization budget \(b\).
 
-A provisional Salt Sensitivity estimator is:
+A provisional Origin Sensitivity estimator is:
 
 $$
-SS_{n,\ell}(c)
+OS_{n,\ell}(b)
 =
 \mathbb E
 \left[
 d_{F,\ell}
 \left(
-X_c(S),
-X_c(S')
+X_b(O),
+X_b(O')
 \right)
 \right].
 $$
 
-Better designs should estimate causal variance attributable to Salt using factorial interventions or hierarchical models.
+Better designs should estimate causal variance attributable to origin using factorial interventions or hierarchical models.
 
 ### E2 — Origin Attenuation
 
-The preregistered test asks whether Salt-attributable functional variation decreases as achieved regret decreases.
+The preregistered test asks whether origin-attributable functional variation decreases as achieved regret decreases.
 
 Performance matching and conditioning require care: selecting only successful runs can create selection bias. Analyses should therefore report:
 
@@ -257,7 +257,7 @@ after accounting for sample size and task instance.
 
 $$
 H_{0,E2}:
-\operatorname{Var}_{S}
+\operatorname{Var}_{O}
 (\Psi_\ell)
 \text{ does not decrease with regret}.
 $$
@@ -299,7 +299,7 @@ Measure:
 - behavior and strategy distance;
 - resource profile;
 - internal and architectural observables where available;
-- Salt-attributable variance.
+- origin-attributable variance.
 
 Include tasks with:
 
@@ -452,7 +452,7 @@ Where possible, use:
 
 - mixed-effects models across tasks and model families;
 - variance decomposition;
-- causal factorial designs for Salt variables;
+- causal factorial designs for origin variables;
 - bootstrap uncertainty for frontier and distance estimates;
 - robustness checks across compatible pseudometrics.
 
@@ -499,4 +499,4 @@ A feasible initial program should prioritize:
 
 The primary contribution would be a method for measuring functional narrowing and origin attenuation—not a claim to have demonstrated a universal intelligence attractor.
 
-For the theoretical motivation, see [The Intelligence Attractor Hypothesis](intelligence-attractor-hypothesis.md). For the origin-specific prediction, see [Salt Sensitivity](empirical-evidence-salt-sensitivity.md).
+For the theoretical motivation, see [The Intelligence Attractor Hypothesis](intelligence-attractor-hypothesis.md). For the origin-specific prediction, see [Origin Dependence and Attenuation](origin-dependence-and-attenuation.md).
