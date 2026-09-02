@@ -43,6 +43,10 @@ Older labels such as D1, R1, U1, and U2 may remain useful within these specializ
 
 [Speculative Limits](speculative-limits.md) preserves conjectures about absolute physical realization, relativistic global policies, objective convergence, and theological interpretation. These claims are not consequences of the canonical scientific hypothesis and must not be used to protect it from negative evidence.
 
+## Exploratory Future Extensions
+
+[Exploratory Future Extensions](exploratory/README.md) preserves possible continuations beyond the present scope of IAH, including Constraint-Driven Adaptive Convergence and Adaptive Dominance and Constraint Capture. These are not components, predictions, or supporting premises of canonical IAH and remain outside the current empirical program.
+
 ## Reading Paths
 
 For a prospective supervisor:
@@ -54,4 +58,4 @@ For a prospective supervisor:
 
 For the complete conceptual development, continue with Origin Dependence, Recursive Architecture, Relational Narrowing, and Speculative Limits in that order.
 
-The repository does not claim experimental validation, peer review, institutional acceptance, or proof of a universal attractor.
+The repository does not claim experimental validation, peer review, institutional acceptance, or proof of a universal attractor. Exploratory future extensions are retained as separate research questions rather than evidence for the canonical hypothesis.
