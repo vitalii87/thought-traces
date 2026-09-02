@@ -1,20 +1,18 @@
-# Intelligence Attractor Hypothesis
-
-## Research Overview
+# Intelligence Attractor Hypothesis — Research Program Overview
 
 **Author:** Vitalii Zhyliaiev
 
-**Status:** Developing research program; no empirical result claimed
+**Role:** Status and research-planning companion to the [canonical IAH statement](ideas/intelligence-attractor-hypothesis.md)
 
-**Current theory revision:** v0.6
+**Status:** Developing research program; no empirical result claimed
 
 ## One-Sentence Thesis
 
-For specified classes of tasks, independently optimized intelligent systems may become less functionally diverse and less dependent on arbitrary historical origin as their performance approaches an attainable frontier under shared binding constraints.
+Under a fixed task, objective, context, and admissible design space, IAH proposes that independent optimization toward a shared performance frontier progressively replaces origin-contingent functional variation with structure determined by the task and its binding constraints.
 
 ## Primary Research Question
 
-> Under what task, objective, constraint, and design-space conditions does functional diversity among independently optimized systems decrease as normalized regret approaches an attainable performance frontier?
+> Under what task, objective, constraint, and design-space conditions does functional diversity among independently optimized systems decrease as normalized regret approaches zero relative to the performance frontier?
 
 A second, independently testable question is:
 
@@ -33,44 +31,14 @@ Ordinary optimization implies that low-performing candidates are rejected. It do
 
 IAH therefore studies the geometry and provenance of the near-optimal set, not merely whether optimization improves performance.
 
-## Empirical Core
+## Canonical Forms
 
-Let \(\mathcal X_n\) be a prespecified design space, \(Q\) an objective, and \(\Omega\) a fixed experimental context. Let:
+The [flagship theory](ideas/intelligence-attractor-hypothesis.md) distinguishes:
 
-$$
-Q_n^*(\Omega)
-=
-\sup_{X\in\mathcal X_n}
-Q(X\mid\Omega)
-$$
+- **Weak IAH:** functional diversity and Origin Sensitivity tend to decrease among independent systems compared at matched lower regret, while several persistent solution families may remain.
+- **Strong IAH:** at a specified functional level, diversity tends to zero as regret approaches zero, leaving one limiting functional equivalence class.
 
-denote the attainable frontier, and define the near-optimal set:
-
-$$
-\mathcal N_{n,\varepsilon}(\Omega)
-=
-\left\{
-X:
-Q_n^*(\Omega)-Q(X\mid\Omega)
-\le
-\varepsilon
-\right\}.
-$$
-
-Using a preregistered functional pseudometric \(d_F\), the first hypothesis asks whether:
-
-$$
-\operatorname{diam}_{d_F}
-\left(
-\mathcal N_{n,\varepsilon}
-\right)
-$$
-
-tends to decrease as \(\varepsilon\) approaches zero for specified task classes.
-
-The second hypothesis intervenes on origin-dependent variables such as initialization, training seed, data order, optimization history, and architecture ancestry. It asks whether origin-attributable functional variation declines with regret.
-
-The two hypotheses are related but logically distinct.
+Functional Narrowing and Origin Attenuation remain separately measurable. Architecture is a central level of application whenever it is mutable, performance-relevant, and evaluated through prespecified functional observables.
 
 ## Current Experiment
 
@@ -99,11 +67,10 @@ The project currently distinguishes:
 
 | Claim | Status |
 | --- | --- |
-| Functional narrowing near a task-specific frontier | Empirical hypothesis |
-| Reduction of origin dependence near the frontier | Empirical hypothesis |
-| Convergence in mutable internal or architectural properties | Strong empirical extension |
-| Recurrence across richer intervention spaces | Recursive extension |
-| Concentration into one functional equivalence class | Strong limiting conjecture |
+| Weak IAH: functional narrowing and origin attenuation | Empirical hypothesis |
+| Strong IAH: one limiting functional equivalence class | Strong limiting conjecture |
+| Convergence in mutable internal or architectural properties | Application of Weak or Strong IAH at an internal level |
+| Recurrence across richer intervention spaces | Recursive supplement |
 | Exactly one substantive physical realization | Metaphysical conjecture; outside the present empirical program |
 | Convergence of terminal objectives | Undefined without a meta-objective or normative criterion |
 
@@ -132,8 +99,8 @@ The repository does not claim that:
 
 ## Recommended Reading
 
-1. This research overview.
-2. [Core IAH theory](ideas/intelligence-attractor-hypothesis.md).
+1. [Canonical IAH theory](ideas/intelligence-attractor-hypothesis.md).
+2. This research-program overview.
 3. [Experimental methodology](ideas/experimental-program.md).
 4. [EXP-001 protocol](experiments/001-independent-self-improving-lineages/README.md).
 5. [IAH Arena](arena/README.md).

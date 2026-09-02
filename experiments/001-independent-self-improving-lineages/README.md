@@ -3,7 +3,9 @@
 **Author:** Vitalii Zhyliaiev  
 **First recorded:** 2026-08-29  
 **Status:** Design draft  
-**IAH claims under test:** E1 — Functional Narrowing; E2 — Origin Attenuation
+**Canonical target:** Weak IAH, through E1 — Functional Narrowing and E2 — Origin Attenuation
+
+**Secondary target:** finite-domain evidence for or against Strong IAH at preregistered functional levels
 
 ## 1. Purpose
 

@@ -1,382 +1,305 @@
 # The Intelligence Attractor Hypothesis
 
-## Functional Convergence Under the Constraints of Reality
+## Independent Convergence Under Shared Reality Constraints
 
 **Author:** Vitalii Zhyliaiev
 
 **Initial formulation:** 2026
 
-**Revision:** v0.6 — 2026-08
+**Status:** Canonical flagship statement of a developing hypothesis; not experimentally validated
 
-**Status:** Developing research framework; not experimentally validated
+This document is the stable public statement of the Intelligence Attractor Hypothesis (IAH). Supporting formal extensions, experimental protocols, speculative interpretations, and historical development are maintained separately.
 
 ---
 
 ## Abstract
 
-The **Intelligence Attractor Hypothesis (IAH)** proposes that, for some classes of sufficiently specified problems, independently optimized intelligent systems may become functionally more similar as their performance approaches an attainable frontier.
+The **Intelligence Attractor Hypothesis** proposes that independently formed intelligent systems, when optimized toward the same performance frontier under the same task, objective, context, and binding constraints, progressively lose functionally consequential differences that arise from arbitrary historical origin.
 
-The hypothesis is stronger than the general observation that constraints sometimes make solutions similar. Its central proposal is that optimization may progressively remove degrees of freedom that are historically arbitrary while increasing the proportion of functionally important properties determined by the task, objective, environment, available information, resource constraints, computation, causality, and physical reality.
+The proposed mechanism is constraint-driven elimination of costly functional freedom. Early in optimization, many architectures, algorithms, representations, and strategies may remain competitive. As shared bottlenecks become binding, fewer ways of organizing the system may preserve near-frontier performance. Different lineages may therefore discover the same functional principles without copying one another.
 
-This narrowing may occur at several levels: external outcomes, policies, representations, algorithms, cognitive architectures, and—where those variables are accessible to optimization—computational or physical implementation. Functional convergence does not imply literal identity: systems may retain different syntax, encodings, geometries, or interchangeable components while sharing the properties required for near-frontier performance. Stronger claims about physical realization are separated from the empirical core.
+IAH has two canonical forms. **Weak IAH** predicts decreasing functional diversity and decreasing origin sensitivity near a frontier, while allowing several persistent solution families. **Strong IAH** conjectures that, at a specified functional level, near-frontier diversity tends to zero and independently optimized systems approach one limiting class of functional equivalence.
 
-IAH contains an empirical core, architectural and recursive extensions, and stronger limiting conjectures. These levels are intentionally separated. A failure of a stronger claim does not rescue or falsify a weaker claim, and expanding the accessible design space does not revise a negative result obtained in a previously specified space.
+Architecture is part of the central scope, not an automatic conclusion. When internal architecture is mutable, causally relevant, and performance-limiting, it becomes part of the optimization landscape. Whether architectural diversity merely narrows or vanishes is then an empirical distinction between the weak and strong forms.
 
-The near-term scientific program is to measure whether functional diversity and dependence on arbitrary origin decrease among independently optimized systems as their regret approaches a task-specific performance frontier.
+## 1. Foundational Claim
 
----
+The identity of IAH is captured by the following claim:
 
-## 1. Central Thesis
+> **Under a fixed task, objective, context, and admissible design space, independent optimization toward a shared performance frontier progressively replaces origin-contingent functional variation with structure determined by the task and its binding constraints. When the system's internal architecture is mutable and functionally consequential, the same pressure extends to its architectural organization.**
 
-IAH begins from an asymmetry in solution space:
+The motivating asymmetry is simple:
 
-> There may be far more ways to be inefficient than ways to remain functionally competitive near an attainable optimum.
+> There may be far more ways to remain inefficient than ways to remain functionally competitive near a frontier.
 
-Different intelligences need not converge because they copy one another. They may converge because independently discovering increasingly effective ways of interacting with the same environment eliminates some inefficient degrees of freedom.
+Systems need not converge through communication, imitation, or shared implementation. The distinctive case is **convergence without inheritance**: different origins and different optimization histories independently encounter the same bottlenecks and reconstruct some of the same solutions.
 
-The central origin-dependence thesis is:
+The claim concerns functional consequences, not textual or material identity. Two systems may use different names, encodings, component layouts, or interchangeable implementations while belonging to the same functional class at the level being studied.
 
-> **Within a fixed context, objective, and prespecified design space, IAH predicts that as normalized regret decreases, variation in prespecified functional properties attributable to arbitrary origin variables tends to decline relative to variation explained by the task and binding constraints.**
+## 2. Domain and Performance
 
-This is a domain-conditional prediction, not a universal theorem. Exact symmetries, neutral directions, multiple optima, modularity, specialization, path dependence, and non-binding constraints may preserve or increase diversity.
-
-## 2. Basic Objects and Scope
-
-Let the task-relevant context at time \(t\) be:
+Every statement of IAH is relative to a specified domain. Let:
 
 $$
-\Omega_t=(e_t,\mathcal T,\mathcal R_t,\mathcal I_t,H),
+\Omega=(e,\mathcal T,\mathcal R,\mathcal I,H)
 $$
 
-where:
-
-- \(e_t\) is the relevant state of the environment;
-- \(\mathcal T\) is the transition dynamics or law governing possible future trajectories;
-- \(\mathcal R_t\) is the available resource and physical-constraint set;
-- \(\mathcal I_t\) is the information and observation interface available to the system;
-- \(H\) is the evaluation or planning horizon.
-
-If the environment is path-dependent, \(e_t\) must include the causally relevant history or a sufficient representation of it.
-
-The laboratory notation \(t\) assumes a stated clock and reference frame. Relativistic and distributed causal-policy extensions are treated separately in [Speculative Limits](speculative-limits.md); they are not required for the empirical program.
-
-Three additional objects are specified separately:
+denote the relevant environment state, dynamics, resources and physical constraints, information interface, and evaluation horizon. Let:
 
 $$
-Q,\qquad O_i,\qquad \mathcal X_n.
+Q,\qquad O_i,\qquad \mathcal X
 $$
 
-- \(Q\) is the objective or evaluation rule;
-- \(O_i\) is the origin vector of system \(i\);
-- \(\mathcal X_n\) is a prespecified admissible design space.
+denote:
 
-Keeping these objects separate prevents historical origin, environmental uncertainty, and normative evaluation from being conflated.
+- the objective or evaluation rule \(Q\);
+- the origin vector \(O_i\) of lineage \(i\);
+- the admissible design space \(\mathcal X\).
 
-For a candidate system \(X\in\mathcal X_n\), performance is evaluated as:
+Origin variables may include initialization, random seed, data order, model ancestry, starting language or architecture, inherited conventions, and optimization history. They must be varied or recorded independently of the task, objective, and current environment.
 
-$$
-Q(X\mid\Omega_t).
-$$
-
-The attainable frontier within \(\mathcal X_n\) is:
+For a system \(X\in\mathcal X\), performance is:
 
 $$
-Q_n^*(\Omega_t)
+Q(X\mid\Omega).
+$$
+
+The performance frontier is:
+
+$$
+Q^*(\Omega)
 =
-\sup_{X\in\mathcal X_n}Q(X\mid\Omega_t).
+\sup_{X\in\mathcal X}Q(X\mid\Omega).
 $$
 
-The supremum is used because the best attainable value need not be realized by any finite candidate.
+The frontier is the best value allowed by the specified domain. It may be an attained maximum or a supremum that finite systems can only approach.
 
-## 3. What “Attractor” Means
-
-IAH uses **attractor** in a generalized optimization sense.
-
-> Unless an explicit update dynamic and basin of attraction are defined, the term refers to concentration of functionally distinct near-optimal solutions rather than to an already established classical dynamical-systems attractor.
-
-Two claims must remain distinct:
-
-1. **Landscape concentration:** the functionally competitive region becomes narrow near the frontier.
-2. **Dynamical attraction:** optimization processes starting from a broad range of initial conditions tend to enter that region.
-
-A narrow optimum may be difficult to discover. A broad basin may lead to several functionally different optima. Experiments must state which claim they test.
-
-Because \(\Omega_t\) changes, an attractor-like region may also move. The optimum at one contextual slice need not remain optimal later:
+The regret of \(X\) is its performance shortfall:
 
 $$
-\mathcal A(\mathcal X_n,\Omega_{t_1},Q)
-\neq
-\mathcal A(\mathcal X_n,\Omega_{t_2},Q).
-$$
-
-The relevant object for dynamic problems is generally a policy evaluated over future trajectories, not an isolated immediate action.
-
-## 4. Levels of Functional Convergence
-
-### Outcome convergence
-
-Different systems reach the same or nearly the same externally measured result.
-
-This is the weakest level. Equal outcomes do not imply equal strategies, costs, or intelligence.
-
-### Policy and strategy convergence
-
-Independent systems discover similar action-selection rules, decompositions, planning strategies, or resource-allocation policies.
-
-### Cognitive and algorithmic convergence
-
-Independent systems converge in functionally important properties of representation, causal modeling, uncertainty handling, memory, compression, search, learning, or error correction.
-
-### Architectural convergence
-
-When architecture materially affects performance or cost and is itself an admissible optimization variable, independently optimized systems may converge in some functional architectural properties.
-
-### Computational and physical convergence
-
-If deeper implementation variables are causally accessible and affect the objective, optimization may act on topology, communication, memory hierarchy, computational substrate, energy use, latency, reliability, and organization of matter.
-
-None of these empirically accessible levels predicts literal identity. Convergence is assessed modulo prespecified task-irrelevant symmetries and implementation differences.
-
-## 5. Outcome Optimality and System Optimality
-
-An optimizer is not merely an external observer of the solution. When its internal costs affect the objective, it becomes part of the object being optimized.
-
-Suppose two agents complete the same task in the same measured time. At the outcome level they appear equivalent. But one may require:
-
-- substantially more computation;
-- greater energy;
-- more memory;
-- higher inference or communication cost;
-- more training;
-- less reliability or robustness.
-
-They are outcome-equivalent but not equally system-optimal under an objective that includes those costs.
-
-> **The optimizer itself becomes part of the optimization problem whenever the machinery used to discover and realize a solution has relevant consequences.**
-
-This is the bridge from outcome convergence to architectural convergence.
-
-## 6. Objective Consequences and Relational Evaluation
-
-Reality determines what alternatives physically cause:
-
-- energy consumption;
-- latency;
-- heat;
-- error probability;
-- reliability;
-- memory and bandwidth use;
-- learning cost;
-- feasible future trajectories.
-
-The objective determines how those consequences are evaluated.
-
-> **Reality determines what alternatives cost and what consequences they produce; the objective determines which consequences count as better.**
-
-IAH does not assume a universally correct objective or universal morality. An optimum may be well-defined relative to a specified subject, objective, context, and horizon without being best for every possible subject.
-
-For policies \(\pi\), a conceptual evaluation is:
-
-$$
-Q(\pi\mid\Omega_t)
+r(X\mid\Omega)
 =
-\mathbb E\!\left[
-U(\tau)
-\mid
-\Omega_t,\pi
-\right],
+Q^*(\Omega)-Q(X\mid\Omega).
 $$
 
-where \(\tau\) is a future trajectory. Under deterministic dynamics the distribution may collapse to a single trajectory; under stochastic dynamics the policy is evaluated over the physically available distribution of consequences.
+Thus \(r\downarrow\) means that performance approaches the frontier, and \(r=0\) means that the frontier is attained.
 
-IAH does **not** derive objectives from causal facts alone. Any claim that objective structures themselves converge requires an independently specified meta-objective, dominance relation, or admissibility principle. Without such an additional criterion, “a better objective” is undefined rather than merely unknown.
+For dynamic or stochastic tasks, the candidate may be a policy rather than an isolated action. The context and horizon must state which future consequences are evaluated. No physical freezing of time is required; a changing context simply defines a different optimization problem or a policy over changing states.
 
-## 7. Empirical Core
+## 3. Functional Levels
 
-The empirical core has two related but logically distinct hypotheses.
+Convergence must be evaluated at a prespecified level \(\ell\). Candidate levels include:
 
-### E1 — Functional Narrowing
-
-For specified classes of tasks, the functional diameter of independently obtained near-optimal systems is predicted to decrease as their regret relative to the attainable performance frontier decreases, after controlling for common inheritance and measurement uncertainty.
-
-### E2 — Origin Attenuation
-
-Under fixed \(\Omega_t\), \(Q\), and \(\mathcal X_n\), the causal influence of controlled origin perturbations on prespecified functional properties is predicted to decrease as independently optimized systems approach the frontier.
-
-E1 and E2 do not imply each other. A narrow region may retain origin-dependent variation, while origin dependence may be weak even when several functionally distinct near-optimal regions exist.
-
-Detailed operational definitions and experiments are provided in [Experimental Program for the Intelligence Attractor Hypothesis](experimental-program.md). Origin variables and confounds are treated in [Origin Dependence and Attenuation](origin-dependence-and-attenuation.md).
-
-## 8. Architectural Extension
-
-### D1 — Internal Convergence
-
-> **When representations, algorithms, or architectures are themselves admissible optimization variables and materially affect performance or cost, near-frontier systems may converge in some prespecified functional properties of those internal levels, modulo task-irrelevant symmetries and implementation details.**
-
-This is stronger than outcome convergence and must be tested separately. A task can admit one best output while supporting many equally efficient internal implementations.
-
-Cognitive and architectural optimization may interact:
-
-$$
-(C_t,A_t)
-\rightarrow
-performance
-\rightarrow
-measurement
-\rightarrow
-modification
-\rightarrow
-(C_{t+1},A_{t+1}).
-$$
-
-This loop expands what can be optimized but does not guarantee improvement, escape from local optima, or convergence to a unique architecture.
-
-## 9. Recursive Extension Across Design Spaces
+| Level | Examples of relevant observables |
+| --- | --- |
+| Outcome | task score, error, reliability |
+| Behavior | response profiles, intervention responses, failure patterns |
+| Strategy | decomposition, planning, allocation, control policy |
+| Algorithm | invariants, complexity, search or approximation method |
+| Architecture | dataflow, memory organization, topology, modularity, scheduling |
+| Resources | latency, energy, memory, communication, learning and switching cost |
 
 Let:
 
 $$
-\mathcal X_0
-\subset
-\mathcal X_1
-\subset
-\mathcal X_2
-\subset\cdots
+d_\ell(X_i,X_j)
 $$
 
-be preregistered design spaces defined by increasingly rich allowed interventions—for example:
+be a preregistered functional distance at level \(\ell\). It must be defined through observables and invariances chosen before results are inspected. Equal scalar scores do not by themselves make two systems functionally equivalent.
 
-- fixed policy;
-- trainable policy;
-- trainable representation;
-- trainable algorithm;
-- modifiable architecture;
-- modifiable optimization mechanism.
-
-### R1 — Cross-Space Recurrence
-
-IAH proposes that functional narrowing may recur separately in increasingly expressive design spaces when newly accessible variables materially affect the objective.
-
-Each \(\mathcal X_n\) defines an independent empirical domain:
+To avoid a trivial effect from repeatedly selecting a smaller cumulative near-optimal set, IAH compares independent systems at matched performance. Define:
 
 $$
-\mathcal A_n
+D_\ell(r)
 =
-\mathcal A(\mathcal X_n,\Omega_t,Q).
+\mathbb E\!\left[
+d_\ell(X_i,X_j)
+\mid
+i\neq j,\;
+r(X_i)\approx r(X_j)\approx r
+\right].
 $$
 
-> Expanding the design space generates a new hypothesis and does not revise a negative result obtained in a previously specified space.
+Empirical studies approximate this quantity with preregistered regret bands, uncertainty models, and robust pairwise summaries. The lineages, not merely the selected solutions, must be independent enough for common inheritance to be measured as a confound.
 
-This prevents an appeal to an unknown “deeper attractor” from immunizing a failed claim.
+Let \(OS_\ell(r)\) denote **Origin Sensitivity**: the effect of controlled origin interventions on prespecified functional properties at level \(\ell\), compared at matched regret. No universal estimator is assumed; factorial interventions and variance decomposition are preferred where possible.
 
-The detailed architectural argument is developed in [Recursive Architectural Attractor and Open-Ended Optimization Depth](recursive-architectural-attractor.md).
+Because achieved regret is itself affected by origin and optimization, conditioning on it can create selection bias. Confirmatory analysis must therefore combine matched-regret comparisons with unconditional trajectories, attrition reporting, and joint causal or hierarchical models.
 
-## 10. Relational Narrowing and Functional Uniqueness
+## 4. Weak IAH
 
-Apparent ties may disappear when additional causally relevant consequences are included. This motivates **Relational Narrowing**:
+Weak IAH predicts two related but separately testable trends:
 
-> As functionally different alternatives are embedded in an increasingly complete but prespecified causally relevant context, the set of contexts in which they remain accidentally tied may shrink.
+$$
+\boxed{
+\text{Weak IAH:}\qquad
+r\downarrow
+\Longrightarrow
+D_\ell(r)\downarrow
+\quad\text{and}\quad
+OS_\ell(r)\downarrow
+}
+$$
 
-This does not imply that every tie disappears. Exact symmetry, genuine indifference, plateaus, and multiple global optima remain legitimate possibilities.
+In words:
 
-Two stronger claims are separated from the empirical core:
+1. **Functional Narrowing:** independently optimized systems tend to become functionally less diverse as they approach the same frontier.
+2. **Origin Attenuation:** their functionally relevant properties tend to become less causally dependent on arbitrary origin.
 
-### U1 — Generic Functional Concentration
+The arrows express statistical tendencies over a prespecified near-frontier regime, not strict monotonicity at every iteration. Diversity may initially expand during exploration, contract when common bottlenecks become active, and then plateau above zero.
 
-For some non-degenerate task and context classes, the functional diameter of the near-optimal set may approach zero as regret approaches zero.
+Weak IAH therefore allows:
 
-### U2 — Strong-Limit Functional Uniqueness
+- several stable near-optimal functional families;
+- residual path dependence;
+- modular or symmetric alternatives;
+- different architectures implementing similar strategies;
+- convergence at one functional level and persistence at another.
 
-For a stated limiting accessible design space, context, objective, horizon, and functional pseudometric, all limiting optimal realizations may belong to one functional equivalence class.
+Evidence may support Functional Narrowing without Origin Attenuation, or the reverse. Such results must be reported separately rather than collapsed into a single positive label.
 
-U2 is not a theorem of arbitrary optimization. It is a strong limiting conjecture. Persistent functionally inequivalent global optima under the specified conditions count against it without necessarily falsifying E1, E2, or D1.
+## 5. Strong IAH
 
-Definitions and counterexamples are developed in [Relational Narrowing and Strong Functional Uniqueness](relational-narrowing-and-strong-functional-uniqueness.md). The stronger conjecture of one substantive physical realization and its relativistic formulation are preserved separately in [Speculative Limits](speculative-limits.md).
+Strong IAH makes the limiting claim:
 
-## 11. Causal and Predictive Knowledge
+$$
+\boxed{
+\text{Strong IAH at level }\ell:\qquad
+\lim_{r\downarrow0}D_\ell(r)=0
+}
+$$
 
-IAH does not assume that an ideal intelligence can calculate everything.
+For the fixed domain and functional level, independently optimized systems approach one limiting class of functional equivalence as their regret approaches zero.
 
-Prediction may be limited by:
+Unity is not introduced as a separate convergence score: zero functional distance already expresses the claim without requiring an arbitrary normalization. The limit does not assert that every real experiment must observe an exact zero. Some domains attain their optimum; others permit only progressively closer approximations.
 
-- chaos and sensitivity to initial conditions;
-- computational irreducibility;
-- quantum or other physical uncertainty;
-- inaccessible information;
-- finite energy, memory, and time;
-- undecidability and self-reference.
+Strong IAH is stronger because it excludes persistent, functionally distinct optimal families at the specified level. It is not stronger because it applies to every possible task. A domain may support Weak IAH and reject Strong IAH.
 
-Near-optimal behavior also does not universally require a complete causal model. A model-free policy or a compressed sufficient statistic may be enough.
+At the architectural level, Strong IAH states:
 
-A defensible conditional extension is:
+> If architecture is mutable, included in the admissible design space, and evaluated through independently specified functionally consequential observables, near-frontier systems approach one functional architectural equivalence class.
 
-> For task distributions in which counterfactual prediction, intervention selection, and generalization are performance-limiting, near-optimal systems should approach the minimum causal or predictive sufficiency required to attain the frontier.
+This does not assert one literal graph, program, substrate, or arrangement of matter. Exact symmetries and transformations declared irrelevant by the metric are quotiented out. Conversely, architectures must not be declared equivalent merely because they receive the same score; doing so would make the strong claim tautological.
 
-In stochastic environments this means approaching the best physically attainable predictive distribution for relevant consequences, not magically knowing one predetermined future.
+## 6. Proposed Mechanism
 
-## 12. Claim Structure
+IAH proposes a transition in what explains system structure:
 
-IAH is not a single linear ladder. Its empirical claims and limiting conjectures form related branches:
+$$
+\text{origin-contingent freedom}
+\;\longrightarrow\;
+\text{constraint-determined functional structure}.
+$$
 
-| Claim | Question | Status |
-| --- | --- | --- |
-| E1 — Functional Narrowing | Does near-optimal functional diversity decrease? | Empirical hypothesis |
-| E2 — Origin Attenuation | Does arbitrary origin matter less near the frontier? | Empirical hypothesis |
-| D1 — Internal Convergence | Does narrowing extend to mutable internal properties? | Strong empirical extension |
-| R1 — Cross-Space Recurrence | Does narrowing recur across richer intervention spaces? | Recursive theoretical/empirical extension |
-| U1 — Generic Functional Concentration | Do some non-degenerate domains approach one functional class? | Strong domain-conditional hypothesis |
-| U2 — Strong-Limit Functional Uniqueness | Does a specified limiting domain admit one optimal functional class? | Strong limiting conjecture |
+The mechanism has four parts:
 
-Failure of a stronger or separate branch does not automatically falsify weaker claims. A weak claim cannot be rescued by appealing to a stronger inaccessible level. Absolute physical uniqueness and objective-level convergence remain outside this core claim table because they are not currently scientific hypotheses; see [Speculative Limits](speculative-limits.md).
+1. Different origins populate different regions of the design space.
+2. Optimization removes errors and inefficiencies under a shared objective.
+3. Common bottlenecks make deviations from some functional properties increasingly costly.
+4. Independent lineages repeatedly retain the properties compatible with near-frontier performance.
 
-## 13. Falsifiability Boundaries
+For a distributed software system, different languages and initial architectures might independently discover bounded queues, backpressure, locality, minimal copying, fault isolation, or similar scheduling principles. The surface implementations may remain different while the bottleneck-removing organization converges.
 
-Evidence against E1 includes repeated preregistered cases in which regret decreases without any systematic reduction in functional diameter.
+The mechanism is a conjecture, not a definition. Constraints can also create niches, compensating trade-offs, or new forms of specialization. The empirical question is whether elimination of costly functional freedom dominates the creation of alternative competitive solutions in the domain being tested.
 
-Evidence against E2 includes persistent causal dependence of near-frontier functional properties on controlled origin interventions.
+## 7. Architectural Depth
 
-Evidence against D1 includes highly optimized systems that remain functionally unrelated at prespecified mutable internal levels under matched conditions.
+The optimizer becomes part of the optimization problem whenever the machinery used to discover and realize a solution has consequences under \(Q\).
 
-Evidence against R1 includes design spaces in which newly accessible variables provide measurable advantages but repeatedly fail to become targets of optimization or exhibit the predicted narrowing.
+Two systems may produce the same output while differing in:
 
-Evidence against U2 includes two genuinely functionally inequivalent exact global optima that persist under the stated finite context, objective, equivalence relation, and design space.
+- computation and learning cost;
+- latency and energy;
+- memory and communication;
+- robustness and error correction;
+- scalability and adaptation;
+- construction, maintenance, or switching cost.
 
-Terms such as “sufficiently specified,” “functionally relevant,” “near the frontier,” and “binding constraint” must be operationalized before results are observed. They cannot be redefined afterward to protect the theory.
+If such properties matter to the objective and can be modified, external optimization pressure can migrate inward:
 
-## 14. Far-Limit Interpretation
+> **As external inefficiencies are removed, any remaining mutable internal property that materially limits performance becomes part of the effective optimization landscape.**
 
-A speculative limiting interpretation of IAH asks what would happen if intelligence and self-optimization could exploit nearly every causally accessible degree of freedom relevant to an objective.
+This preserves the architectural ambition of IAH without assuming its conclusion. Optimization pressure on architecture does not logically guarantee architectural convergence. Weak and Strong IAH must be tested at the architectural level using observables independent of the final scalar score, such as causal response profiles, scaling curves, dataflow, memory organization, error propagation, and adaptation under perturbation.
 
-In that regime, arbitrary historical properties might contribute progressively less to functionally important structure, while information, computation, resources, the objective, and physical constraints contribute more.
+The same reasoning may be tested across progressively richer intervention spaces—policy, representation, algorithm, architecture, and optimization mechanism. Each expanded space is a new empirical domain; it cannot be invoked to erase a negative result in an earlier one.
 
-The empirical core and U1–U2 do not imply infinite intelligence, complete prediction, a universal value system, or literal architectural identity of all optimized systems. None of these claims implies that the limiting regime is physically reachable.
+## 8. Why IAH Is Not Trivial Optimization
 
-The strongest possible implication is a regime in which remaining improvement is constrained primarily by irreducible limits of accessible reality rather than correctable deficiencies of the intelligent system. This far-limit interpretation is not required for near-term empirical validation of E1 or E2.
+Ordinary optimization states that higher-scoring candidates are preferred. It does not imply that:
 
-## 15. Research Direction
+- independent near-frontier systems become closer at matched regret;
+- origin explains less of their remaining functional structure;
+- the same bottleneck-removing principles are rediscovered without inheritance;
+- convergence penetrates from outcomes into algorithms or architecture;
+- one limiting functional class remains at the frontier.
 
-The immediate research question is:
+Nor does IAH follow from measuring the diameter of nested cumulative near-optimal sets: those sets shrink by construction. The nontrivial test compares independently generated systems within matched regret bands and asks whether functional and origin-dependent variation changes beyond selection, shared ancestry, and measurement artifacts.
 
-> **Under what task, objective, constraint, and design-space conditions does functional diversity among independently optimized systems decrease as normalized regret approaches zero?**
+## 9. Evidence
 
-A corresponding origin question is:
+Evidence for Weak IAH in a specified domain would require:
 
-> **Does the causal contribution of initialization and historical path dependence to functionally important properties decrease near independently measured performance frontiers?**
+- genuinely varied and recorded origins;
+- independent optimization without access to other lineages;
+- a shared, frozen task, objective, context, and resource regime;
+- improvement toward a known or reproducibly estimated frontier;
+- preregistered functional observables and distances;
+- lower \(D_\ell(r)\) at matched lower regret;
+- lower origin-attributable variation at matched lower regret;
+- controls for shared training data, libraries, templates, and evaluator leakage;
+- preservation of negative, divergent, and failed lineages.
 
-The next step is not to assume universal convergence, but to identify:
+Evidence becomes stronger when common inheritance is reduced and the same functional principles are reconstructed through different histories, representations, languages, model families, or architectures.
 
-- where narrowing occurs;
-- where it fails;
-- which constraints produce it;
-- which symmetries preserve diversity;
-- how deeply it penetrates into cognition and architecture;
-- whether the observed effects exceed ordinary common inheritance and shared engineering convention.
+Repeated independent discovery is mechanistic evidence, not sufficient proof by itself. Textual code similarity, a single optimization trajectory, or convergence among near-identical models is weak evidence.
 
-See:
+## 10. Falsification and Legitimate Failure
 
-- [Origin Dependence and Attenuation](origin-dependence-and-attenuation.md)
-- [Relational Narrowing and Strong Functional Uniqueness](relational-narrowing-and-strong-functional-uniqueness.md)
-- [Recursive Architectural Attractor](recursive-architectural-attractor.md)
-- [Experimental Program](experimental-program.md)
-- [Related Work Map](related-work.md)
-- [Speculative Limits](speculative-limits.md)
+Weak IAH is weakened in a preregistered domain when adequate optimization and measurement show that:
+
+- functional diversity remains stable or increases as matched regret decreases;
+- controlled origin variables continue to explain the same or a greater share of functional variation;
+- apparent convergence disappears after common-inheritance controls;
+- convergence occurs only in surface syntax while causal and resource profiles remain distinct.
+
+Strong IAH is rejected at a specified level by persistent, functionally inequivalent optimal or arbitrarily near-optimal families whose distance remains bounded away from zero under the preregistered metric.
+
+Legitimate counterexamples include multiple optima, exact symmetries, neutral networks, specialization, plateaus, and irreducible trade-offs. They are scientific outcomes, not defects that may automatically be removed by adding retrospective criteria.
+
+Failure to reach the frontier is an optimization failure rather than direct evidence about its geometry. Attrition must nevertheless be retained because conditioning only on successful lineages can manufacture apparent convergence.
+
+No negative result may be dismissed by appealing after the fact to an unspecified deeper design space, a more complete objective, unknown physics, or an inaccessible future intelligence.
+
+## 11. Scope Boundaries
+
+IAH is conditional on the specified task, objective, context, horizon, design space, and functional level. It does not claim that all intelligent systems converge across different goals or environments.
+
+Reality determines available consequences and costs; \(Q\) determines how those consequences are ranked. Additional causal knowledge can reveal hidden consequences but does not derive one universal morality or terminal objective.
+
+IAH does not imply literal identity, complete prediction, infinite intelligence, or a timeless optimal machine. In changing environments, the relevant optimum may be a moving policy class. Claims about one substantive physical realization, complete causal optimization, relativistic global policies, objective convergence, or theological identity belong to speculative extensions rather than the canonical scientific claim.
+
+## 12. Research Program
+
+The first experimental target is not proof of a universal attractor. It is a controlled test of Weak IAH and a finite-domain test of Strong IAH at prespecified functional levels.
+
+The current program consists of:
+
+1. selecting a bounded task with a known or estimable frontier;
+2. defining functional metrics and origin interventions before observing outcomes;
+3. optimizing independent lineages under shared evaluation and resource constraints;
+4. comparing functional diversity and origin sensitivity in matched regret bands;
+5. testing whether convergence reaches mutable algorithms and architectures;
+6. retaining persistent degeneracy as a possible result.
+
+The hypothesis has not yet been empirically validated. Its immediate scientific value lies in turning an architectural intuition into a falsifiable study of the geometry and provenance of independently discovered near-optimal systems.
+
+## Supporting Documents
+
+- [Experimental Program](experimental-program.md) — general operational methodology.
+- [Origin Dependence and Attenuation](origin-dependence-and-attenuation.md) — origin variables, interventions, and confounds.
+- [EXP-001: Independent Self-Improving Lineages](../experiments/001-independent-self-improving-lineages/README.md) — first concrete protocol.
+- [IAH Arena](../arena/README.md) — experimental infrastructure.
+- [Recursive Architectural Attractor](recursive-architectural-attractor.md) — nested intervention spaces and self-modification.
+- [Relational Narrowing and Strong Functional Uniqueness](relational-narrowing-and-strong-functional-uniqueness.md) — uniqueness arguments and counterexamples.
+- [Related Work Map](related-work.md) — literature-positioning plan.
+- [Speculative Limits](speculative-limits.md) — physical, relativistic, objective-level, and theological limits.

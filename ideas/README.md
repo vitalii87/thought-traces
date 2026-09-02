@@ -1,52 +1,57 @@
 # Intelligence Attractor Hypothesis — Theory Map
 
-This directory separates the defensible research core from stronger extensions and far-limit speculation. The documents address one research program, but they do not all carry the same evidential weight.
+The repository has one canonical statement of IAH. Every other document is an empirical, theoretical, methodological, or speculative supplement.
 
-For a first review, begin at the repository-level [Research Overview](../RESEARCH_OVERVIEW.md).
+## Canonical Statement
 
-## Research Core
+### [The Intelligence Attractor Hypothesis](intelligence-attractor-hypothesis.md)
 
-These are the documents to send to a prospective supervisor or use in a PhD discussion.
+This is the flagship theory to read, cite, and send to a prospective supervisor. It preserves the foundational intuition while defining the two canonical forms:
 
-1. [The Intelligence Attractor Hypothesis](intelligence-attractor-hypothesis.md) — definitions, scope, and the hierarchy of claims.
-2. [Experimental Program](experimental-program.md) — operationalization, controls, metrics, and falsification.
-3. [Origin Dependence and Attenuation](origin-dependence-and-attenuation.md) — the origin-attenuation hypothesis and an initial empirical route.
-4. [EXP-001: Independent Self-Improving Lineages](../experiments/001-independent-self-improving-lineages/README.md) — the first concrete protocol.
+| Form | Claim |
+| --- | --- |
+| Weak IAH | Functional diversity and Origin Sensitivity tend to decrease at matched lower regret; a nonzero plateau is allowed |
+| Strong IAH | Functional diversity tends to zero at a specified level as regret approaches zero |
 
-## Theoretical Extensions
+Behavior, strategy, algorithm, architecture, and resource organization are levels at which either form may be tested. They are not separate competing definitions of IAH.
 
-These texts sharpen or extend the core, but are not required to test its two principal empirical claims.
+## Empirical and Methodological Supplements
 
-| Document | Primary question | Status |
+| Document | Role | Status |
 | --- | --- | --- |
-| [Relational Narrowing and Strong Functional Uniqueness](relational-narrowing-and-strong-functional-uniqueness.md) | Can added, prespecified causal context reduce accidental ties, and can a limiting domain concentrate into one functional class? | Formal extension; U2 remains a conjecture |
-| [Recursive Architectural Attractor](recursive-architectural-attractor.md) | Can narrowing recur when progressively deeper design variables become mutable? | Strong theoretical and empirical extension |
+| [Experimental Program](experimental-program.md) | Operational definitions, controls, metrics, statistical analysis, and falsification | Proposed methodology |
+| [Origin Dependence and Attenuation](origin-dependence-and-attenuation.md) | Origin variables, Origin Sensitivity, common inheritance, and causal interventions | Testable empirical supplement |
+| [EXP-001: Independent Self-Improving Lineages](../experiments/001-independent-self-improving-lineages/README.md) | First concrete test of functional narrowing and origin attenuation | Design draft |
+| [IAH Arena](../arena/README.md) | Isolated optimization, evaluation, budgets, provenance, and telemetry | Core infrastructure operational |
 
-## Speculative Limits
+The labels E1 and E2 may be used inside experimental protocols for Functional Narrowing and Origin Attenuation. They are measurements of the canonical theory, not additional top-level versions.
 
-[Speculative Limits](speculative-limits.md) contains the relativistic, absolute-architectural, objective-level, and theological interpretations. They are preserved as philosophical boundaries of the project, not presented as empirical consequences or current PhD claims.
+## Theoretical Supplements
+
+| Document | Role |
+| --- | --- |
+| [Recursive Architectural Attractor](recursive-architectural-attractor.md) | Tests the same weak/strong distinction across progressively richer intervention spaces |
+| [Relational Narrowing and Strong Functional Uniqueness](relational-narrowing-and-strong-functional-uniqueness.md) | Develops arguments and counterexamples concerning contextual ties and limiting uniqueness |
+
+Older labels such as D1, R1, U1, and U2 may remain useful within these specialized analyses. They do not replace the public Weak IAH / Strong IAH hierarchy.
 
 ## Research Context
 
-[Related Work Map](related-work.md) identifies neighboring literatures and the intended novelty boundary. It is currently a research plan rather than a completed literature review; verified primary citations are still required.
+[Related Work Map](related-work.md) identifies neighboring literatures and the intended novelty boundary. It remains a research plan rather than a completed literature review; verified primary citations are still required.
 
-## Claim Structure
+## Speculative Limits
 
-| Label | Claim | Role |
-| --- | --- | --- |
-| E1 | Functional diversity contracts near an attainable frontier in specified domains | Empirical core |
-| E2 | Origin-attributable functional variation decreases near that frontier | Empirical core |
-| D1 | Convergence reaches mutable internal or architectural properties | Strong empirical extension |
-| R1 | Narrowing recurs across progressively richer intervention spaces | Recursive extension |
-| U1 | Some non-degenerate domains approach one functional class | Domain-conditional strong hypothesis |
-| U2 | A specified limiting domain contains one optimal functional class | Strong limiting conjecture |
-| U3 | Complete embedded optimization leaves one substantive physical realization | Metaphysical conjecture; [separate](speculative-limits.md) |
-| O1 | Terminal objectives themselves converge | Undefined without a meta-objective; [separate](speculative-limits.md) |
+[Speculative Limits](speculative-limits.md) preserves conjectures about absolute physical realization, relativistic global policies, objective convergence, and theological interpretation. These claims are not consequences of the canonical scientific hypothesis and must not be used to protect it from negative evidence.
 
-E1 and E2 are related but logically distinct. A failure of U2 or U3 does not by itself falsify E1. Conversely, an inaccessible stronger claim cannot be used to dismiss a negative result in a preregistered finite domain.
+## Reading Paths
 
-## Current Priority
+For a prospective supervisor:
 
-> Under what task, objective, constraint, and design-space conditions does functional diversity among independently optimized systems decrease as normalized regret approaches an attainable performance frontier?
+1. [Canonical IAH statement](intelligence-attractor-hypothesis.md)
+2. [Experimental Program](experimental-program.md)
+3. [EXP-001](../experiments/001-independent-self-improving-lineages/README.md)
+4. [Research Program Overview](../RESEARCH_OVERVIEW.md)
+
+For the complete conceptual development, continue with Origin Dependence, Recursive Architecture, Relational Narrowing, and Speculative Limits in that order.
 
 The repository does not claim experimental validation, peer review, institutional acceptance, or proof of a universal attractor.

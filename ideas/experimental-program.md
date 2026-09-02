@@ -109,6 +109,8 @@ $$
 
 Claims must therefore report coverage limitations and uncertainty rather than treating the observed sample as the complete near-optimal region.
 
+Because these cumulative sets are nested as \(\varepsilon\) decreases, their raw diameter is mechanically non-increasing. A decreasing cumulative-set diameter alone is therefore not a confirmatory test of IAH. Near-optimal sets remain useful for frontier topology, coverage, and exact-optimum analysis; the primary trend test uses matched regret bands.
+
 ## 5. Functional Observables and Pseudometrics
 
 For each level \(\ell\), define a prespecified observable representation:
@@ -155,34 +157,41 @@ Possible operational components include:
 
 No single metric is presumed universally correct. Metric selection is part of the scientific hypothesis and must precede observation of convergence.
 
-## 6. Functional Diameter
+## 6. Matched-Regret Functional Diversity
 
-Define:
+For a target regret \(r\) and preregistered band width \(\delta\), define:
 
 $$
-D_{n,\ell}(\varepsilon)
+\mathcal B_n(r,\delta)
 =
-\operatorname{diam}_{d_{F,\ell}}
-\left(
-\mathcal N_{n,\varepsilon}(\Omega)
-\right).
+\left\{
+X\in\mathcal X_n:
+\left|r_n(X\mid\Omega)-r\right|
+\le
+\delta
+\right\}.
 $$
 
-The empirical estimate is:
+The canonical diversity quantity is the expected pairwise functional distance between independently obtained systems in the same band:
 
 $$
-\widehat D_{n,\ell}(\varepsilon)
+D_{n,\ell}(r;\delta)
 =
-\operatorname{diam}_{d_{F,\ell}}
-\left(
-\widehat{\mathcal N}_{n,\varepsilon}
-\right).
+\mathbb E
+\left[
+d_{F,\ell}(X_i,X_j)
+\mid
+i\neq j,\;
+X_i,X_j\in\mathcal B_n(r,\delta)
+\right].
 $$
 
-Because sample diameter is sensitive to outliers and sample size, studies should also report robust summaries such as:
+The band definition, overlap rule, and any schedule for \(\delta\) must be frozen before outcome inspection. Because empirical pairwise summaries are sensitive to dependence, outliers, and sample size, studies should report:
 
 - median pairwise distance;
+- mean pairwise distance where justified;
 - upper distance quantiles;
+- cumulative near-optimal-set diameter as a secondary descriptive statistic;
 - cluster count under a preregistered threshold;
 - effective dimensionality;
 - variance components;
@@ -193,12 +202,12 @@ Because sample diameter is sensitive to outliers and sample size, studies should
 For prespecified task classes:
 
 $$
-D_{n,\ell}(\varepsilon)
-\text{ tends to decrease as }
-\varepsilon\downarrow.
+D_{n,\ell}(r;\delta)
+\text{ tends to decrease over a prespecified near-frontier regime as }
+r\downarrow.
 $$
 
-The hypothesis does not require monotonic decrease for every task or every level.
+The hypothesis does not require pointwise monotonic decrease for every iteration, task, or level. The confirmatory statistical trend and comparison bands must be specified for each experiment.
 
 ## 7. Origin Dependence
 
@@ -210,22 +219,20 @@ $$
 
 be the system produced under optimization budget \(b\).
 
-A provisional Origin Sensitivity estimator is:
+A provisional matched-regret Origin Sensitivity quantity is:
 
 $$
-OS_{n,\ell}(b)
+OS_{n,\ell}(r)
 =
-\mathbb E
-\left[
-d_{F,\ell}
+\operatorname{Effect}_{O}
 \left(
-X_b(O),
-X_b(O')
-\right)
-\right].
+\Psi_\ell
+\mid
+r_n(X_b)\approx r
+\right).
 $$
 
-Better designs should estimate causal variance attributable to origin using factorial interventions or hierarchical models.
+Here \(\operatorname{Effect}_{O}\) is not one universal estimator. Studies should define it through factorial interventions, causal variance components, or another preregistered model while accounting for optimization budget and selection.
 
 ### E2 — Origin Attenuation
 

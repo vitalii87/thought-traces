@@ -109,30 +109,31 @@ $$
 
 is not generally well-defined because origin contains discrete, continuous, categorical, and historically structured variables.
 
-An operational alternative is to compare systems produced under controlled origin interventions.
+An operational alternative is to compare systems produced under controlled origin interventions at matched achieved regret.
 
-For a prespecified functional pseudometric \(d_{F,\ell}\), a provisional sensitivity at optimization budget \(b\) is:
+For prespecified functional observables \(\Psi_\ell\), a provisional matched-regret quantity is:
 
 $$
-OS_{n,\ell}(b)
+OS_{n,\ell}(r)
 =
-\mathbb E
-\left[
-d_{F,\ell}
+\operatorname{Effect}_{O}
 \left(
-X_b(O),X_b(O')
-\right)
-\right],
+\Psi_\ell(X_b(O))
+\mid
+r_n(X_b(O))\approx r
+\right),
 $$
 
 where:
 
-- \(O\) and \(O'\) are controlled origin interventions;
+- \(O\) contains controlled origin interventions;
 - \(n\) identifies the design space;
 - \(\ell\) identifies the functional level being compared;
-- external context and objective are matched.
+- \(b\) is recorded optimization budget;
+- external context and objective are fixed;
+- systems are compared at matched regret \(r\).
 
-Pairwise distance is only one possible estimator. A stronger statistical design may estimate the proportion of variance in predefined functional features causally attributable to origin while controlling for performance, task instance, model family, and measurement error.
+The operator \(\operatorname{Effect}_{O}\) must be instantiated by the study. A pairwise controlled comparison is one option. A stronger statistical design may estimate the proportion of variance in predefined functional features causally attributable to origin while controlling for performance, optimization budget, task instance, model family, and measurement error.
 
 No universal Origin Sensitivity metric is assumed.
 
